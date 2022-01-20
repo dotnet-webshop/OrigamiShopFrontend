@@ -22,8 +22,8 @@ function LoginPage(){
             res => {
                 if(res !== undefined)
                 {
-                    console.log(res.token)
-                    onLogin(res.token)
+                    console.log(res.Token)
+                    onLogin(res.Token)
                 }
             }
         )
