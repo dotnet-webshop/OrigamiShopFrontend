@@ -1,5 +1,5 @@
 ﻿import React, {Component} from 'react';
-import CustomerList from "./Customer/CustomerList";
+import CustomerDetails from "./Customer/CustomerDetails";
 
 
 export class CustomerProfile extends Component {
@@ -20,7 +20,7 @@ export class CustomerProfile extends Component {
         return (
             <div >
 
-                <CustomerList customers={customerP} />
+                <CustomerDetails customers={customerP} />
                   
             </div>
         );
