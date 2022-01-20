@@ -52,7 +52,7 @@ const AdminProductTable = () => {
                 </thead>
                 <tbody>
                 {products.map(product => <tr key={product.Id}>
-                    <td>{product.Id}></td>
+                    <td>{product.Id}</td>
                     <td><Link to={"/product/"+product.Id}>{product.ProductName}</Link></td>
                     <td>${product.ProductPrice}</td>
                     <td>{product.Stock}</td>
