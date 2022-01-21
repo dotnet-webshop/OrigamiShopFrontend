@@ -7,34 +7,37 @@ import OrderDetails from "./OrderDetails";
 function Orders({orderList}) {
     console.log(orderList);
     return (
-        <div>
-            <Accordion defaultActiveKey="0">
-                <Accordion.Item eventKey="1">
-                    <Accordion.Header>
-                        Orders
-                    </Accordion.Header>
-                    <Accordion.Body >
-                        {orderList.map(order => 
-                            <ul className="list-group list-group-flush" key={order.Id}>
-                                <li className="list-group-item">Order Id: {order.Id}</li>
-                                <li className="list-group-item">Total Price: {order.TotalPrice}</li>
-                                <li className="list-group-item">Shipping Address: {order.ShippingAddress}</li>
-                                <li className="list-group-item">Status: {order.OrderStatus}</li>
-                                <li>
-                                    <Accordion.Item eventKey="1">
-                                        <Accordion.Header>Products</Accordion.Header>
-                                            <Accordion.Body>
-                                                <OrderDetails Items={order.Products}/>
-                                            </Accordion.Body>
-                                    </Accordion.Item>
-                                </li>
-                            </ul> 
-                        )} 
-                    </Accordion.Body>
-                </Accordion.Item>
-                
-            </Accordion>
-            
+        <div >
+            <table className="table table-striped">
+                <thead>
+                <tr>
+                    <th>Order Id</th>
+                    <th>Total Price</th>
+                    <th>Shipping Address</th>
+                    <th>Status</th>
+                    <th>Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {orderList.map(order => <tr key={order.Id}>
+                        <td>{order.Id}</td>
+                        <td>{order.TotalPrice}</td>
+                        <td>{order.ShippingAddress}</td>
+                        <td>{order.OrderStatus}</td>
+                        <td>
+                            <Accordion defaultActiveKey="0">
+                                <Accordion.Item eventKey="1">
+                                    <Accordion.Header>Products</Accordion.Header>
+                                        <Accordion.Body>
+                                            <OrderDetails Items={order.Products}/>
+                                        </Accordion.Body>
+                                </Accordion.Item>
+                            </Accordion>
+                        </td>
+                    </tr>)}
+                </tbody>
+            </table>
+          
         </div>
     );
 }

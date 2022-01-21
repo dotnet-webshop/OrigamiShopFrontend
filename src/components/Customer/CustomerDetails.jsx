@@ -19,8 +19,7 @@ function CustomerDetails({customer}) {
                         <li className="list-group-item"><strong>Phone Number: </strong>{customer.PhoneNumber}</li>
                         <li className="list-group-item"><strong>Shipping Address: </strong>{customer.DefaultShippingAddress}</li>
                         <li className="list-group-item"><strong>Billing Address: </strong>{customer.BillingAddress}</li>
-                    </ul>
-                    
+                    </ul>  
 
                 </div>
             

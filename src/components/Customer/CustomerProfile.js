@@ -3,6 +3,8 @@ import Orders from "./Orders";
 import {useSelector} from "react-redux";
 import React, {Component, useEffect, useState} from "react";
 import { getOne, endpoints } from "../../services/api";
+import Button from 'react-bootstrap/Button'
+
 export const CustomerProfile = () => {
 
     const Id = useSelector(state => state.user.Id);
@@ -20,12 +22,15 @@ export const CustomerProfile = () => {
         getOne(endpoints.customers, Id).then(data => setCustomer({...data}))        
     }, [])
 
+    
+
     return (
 
 
             <div >
-                    
+                
                 <CustomerDetails customer={customer} />
+                
                 <Orders orderList={customer.Orders} />       
             </div>
     )
