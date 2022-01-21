@@ -12,7 +12,7 @@ function Orders({orderList}) {
             <table className="table table-striped">
                 <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>Order Id</th>
                     <th>Total Price</th>
                     <th>Shipping Address</th>
                     <th>Status</th>
@@ -28,7 +28,7 @@ function Orders({orderList}) {
                     <td>
                     <Accordion defaultActiveKey="0">
                         <Accordion.Item eventKey="0">
-                            <Accordion.Header><srtong></srtong></Accordion.Header>
+                            <Accordion.Header><srtong>Products</srtong></Accordion.Header>
                                 <Accordion.Body>
                                     <OrderDetails Items={order.Products}/>
                                 </Accordion.Body>
