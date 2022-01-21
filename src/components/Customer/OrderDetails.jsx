@@ -1,7 +1,4 @@
-﻿import {useSelector} from "react-redux";
-import React, {useEffect, useState} from "react";
-import { endpoints, getOne} from "../../services/api";
-import axios from "axios";
+﻿import {Accordion} from 'react-bootstrap';
 
 
 
@@ -12,8 +9,17 @@ function OrderDetails({Items}) {
             
         Items.map(item =>
                 <div>
-                    <p>{item.Product.ProductName}</p>
-    
+
+                    <Accordion defaultActiveKey="0">
+                        <Accordion.Item eventKey="0">
+                            <Accordion.Header><srtong>Product: </srtong>{item.Product.ProductName}</Accordion.Header>
+                            <Accordion.Body>
+                                <p><srtong>Price: </srtong>{item.Product.Price}</p>
+                                <p><srtong>Quantity: </srtong>{item.Product.Quantity}</p>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    </Accordion>
+                    
                 </div>)
             
        

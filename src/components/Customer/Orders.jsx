@@ -1,5 +1,6 @@
 import {useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
+import {Accordion} from 'react-bootstrap';
 import { endpoints, getOne} from "../../services/api";
 import OrderDetails from "./OrderDetails";
 
@@ -15,6 +16,7 @@ function Orders({orderList}) {
                     <th>Total Price</th>
                     <th>Shipping Address</th>
                     <th>Status</th>
+                    <th>Order Details</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -24,15 +26,21 @@ function Orders({orderList}) {
                     <td>{order.ShippingAddress}</td>
                     <td>{order.OrderStatus}</td>
                     <td>
-                       <OrderDetails Items={order.Products}/>
-
+                    <Accordion defaultActiveKey="0">
+                        <Accordion.Item eventKey="0">
+                            <Accordion.Header><srtong></srtong></Accordion.Header>
+                                <Accordion.Body>
+                                    <OrderDetails Items={order.Products}/>
+                                </Accordion.Body>
+                        </Accordion.Item>
+                    </Accordion>
                     </td>
                 </tr>)}
                 </tbody>
             </table>
-        </div>
            
-       
+           
+        </div>
     );
 }
 
