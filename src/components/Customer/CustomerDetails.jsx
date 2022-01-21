@@ -1,27 +1,8 @@
 ﻿
-import {useSelector} from "react-redux";
-import React, {useEffect, useState} from "react";
-import {endpoints, getOne} from "../../services/api";
-import Orders from "./OrderDetails";
-import axios from "axios";
 
 
-function CustomerDetails(props) {
-    
-    const Id = useSelector(state => state.user.Id);
-    const [customer, setCustomer] = useState({
-        Id,
-        FullName: "",
-        Email: "",
-        PhoneNumber:"",
-        DefaultShippingAddress:"",
-        BillingAddress:"",
-    });
-    useEffect(() => {
-        getOne(endpoints.customers, Id).then(data => setCustomer(data))
-        
-    }, [])
-   
+
+function CustomerDetails({customer}) {
     
     return (
         <div>
@@ -39,6 +20,7 @@ function CustomerDetails(props) {
                         <li className="list-group-item"><strong>Shipping Address: </strong>{customer.DefaultShippingAddress}</li>
                         <li className="list-group-item"><strong>Billing Address: </strong>{customer.BillingAddress}</li>
                     </ul>
+                    
 
                 </div>
             

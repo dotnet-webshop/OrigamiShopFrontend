@@ -1,15 +1,10 @@
 import {useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
 import { endpoints, getOne} from "../../services/api";
+import OrderDetails from "./OrderDetails";
 
-function Orders(props) {
-
-    const Id = useSelector(state => state.user.Id);
-    const [orders, setOrders] = useState([]);
-    useEffect(() => {
-        getOne(endpoints.orders, Id).then(data => setOrderDetails(data))
-        
-    }, [])
+function Orders({orderList}) {
+    console.log(orderList);
     return (
         <div>
              <h3> Orders </h3>
@@ -23,11 +18,15 @@ function Orders(props) {
                 </tr>
                 </thead>
                 <tbody>
-                {orders.map(order => <tr key={order.Id}>
+                {orderList.map(order => <tr key={order.Id}>
                     <td>{order.Id}</td>
                     <td>{order.TotalPrice}</td>
                     <td>{order.ShippingAddress}</td>
                     <td>{order.OrderStatus}</td>
+                    <td>
+                       <OrderDetails Items={order.Products}/>
+
+                    </td>
                 </tr>)}
                 </tbody>
             </table>
