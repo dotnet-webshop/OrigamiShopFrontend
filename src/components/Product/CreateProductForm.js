@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
-import {Button, Input, Label} from "reactstrap";
+import React, { useEffect, useState} from 'react'
+import { Button, Input, Label } from "reactstrap";
+import ReadProductImages from "./ProductImage"
 
 const CreateProductForm = ({onCreate}) => {
     const initialProductState = {
@@ -11,7 +12,13 @@ const CreateProductForm = ({onCreate}) => {
         DateCreated:Date.now().toString()
     }
     const [newProduct,setNewProduct] = useState(initialProductState)
-    
+    const [productImages, setProductImages] = useState([])
+
+    useEffect(() => {
+        var filelist = ReadProductImages();
+        setProductImages(filelist);
+   }, []);
+
     const onHandleSubmit = () => {
         if (onCreate)
         {
@@ -22,6 +29,11 @@ const CreateProductForm = ({onCreate}) => {
             console.error("onCreate prop not set.")
         }
     }
+
+    const selectProductImageList = productImages.map(productImage =>
+        <option value={productImage}>{productImage}</option>
+    );
+
     return (
         <form>
             <div>
@@ -31,10 +43,13 @@ const CreateProductForm = ({onCreate}) => {
                        onChange={ (e) => setNewProduct({...newProduct,ProductName: e.target.value}) }/>
             </div>
             <div>
-                <Label  for="Image">Image</Label>
-                <Input
+                <Label for="Image">Image</Label>
+                <select className="form-control"
                     value={newProduct.ProductImageUrl}    
-                    onChange={(e) => setNewProduct({...newProduct, ProductImage: ""})} name="Image" type="image"/>
+                    onChange={(e) => setNewProduct({ ...newProduct, ProductImage: e.target.value })}
+                    name="Image" type="image">
+                    {selectProductImageList}
+                </select>
             </div>
             <div>
                 <Label for="Price">Product Price</Label>
