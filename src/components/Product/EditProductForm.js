@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {Button, Input, Label} from "reactstrap";
-import ReadProductImages from "./ProductImage"
+import { ReadProductImages, FormEditProductImage } from "./ProductImage"
 
 const EditProductForm = ({product,onSubmit}) => {
 
@@ -38,16 +38,7 @@ const EditProductForm = ({product,onSubmit}) => {
                        value={newProduct.ProductName}
                        onChange={ (e) => setNewProduct({...newProduct,ProductName: e.target.value}) }/>
             </div>
-            <div>
-                <Label  for="Image">Image</Label>
-                <select className="form-control"
-                    value={newProduct.ProductImageUrl}
-                    onChange={(e) => setNewProduct({ ...newProduct, ProductImageUrl: e.target.value })}
-                    name="Image" type="image">
-                    {selectProductImageList}
-                </select>
-                <img src={newProduct.ProductImageUrl} alt={newProduct.ProductName} width="150px" height="150px" />
-            </div>
+            <FormEditProductImage newProduct={newProduct} productImages={productImages} setNewProduct={setNewProduct} />
             <div>
                 <Label for="Price">Product Price</Label>
                 <Input required name="Price" type="number"
