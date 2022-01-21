@@ -46,10 +46,11 @@ const CreateProductForm = ({onCreate}) => {
                 <Label for="Image">Image</Label>
                 <select className="form-control"
                     value={newProduct.ProductImageUrl}    
-                    onChange={(e) => setNewProduct({ ...newProduct, ProductImage: e.target.value })}
+                    onChange={(e) => setNewProduct({ ...newProduct, ProductImageUrl: e.target.value })}
                     name="Image" type="image">
                     {selectProductImageList}
                 </select>
+                <img src={newProduct.ProductImageUrl} alt={newProduct.ProductName} width="150px" height="150px" />
             </div>
             <div>
                 <Label for="Price">Product Price</Label>
