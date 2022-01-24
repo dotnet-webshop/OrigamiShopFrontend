@@ -107,7 +107,7 @@ const AdminOrdersTable = () => {
                                         <tbody>
                                             {order.Products.map(item =>
 
-                                                <tr>
+                                                <tr key={item.ProductId}>
                                                     <td>
                                                         {item.Product.ProductName}
                                                     </td>
