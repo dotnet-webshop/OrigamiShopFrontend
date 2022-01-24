@@ -1,10 +1,13 @@
 // details about an order and the option for a admin to edit that order
 
 import { useEffect, useState } from "react"
-import { endpoints, getOne } from "../../services/api"
-import { Button } from "reactstrap"
+import { endpoints, getAll, getOne } from "../../services/api"
+import { Button, Input } from "reactstrap"
 
 const OrderDetailsPage = ({ match }) => {
+
+    const [products,setProducts] = useState([])
+
     const [customer, setCustomer] = useState({
         Id: "",
         FullName: "",
@@ -40,6 +43,8 @@ const OrderDetailsPage = ({ match }) => {
             .then(p => {
                 if (p !== null) {
                     setOrder({ ...p })
+                    getAll(endpoints.products)
+                    .then(data => setProducts(data))
 
                     getOne(endpoints.customers, order.CustomerId)
                         .then(data => setCustomer(data))
@@ -74,7 +79,8 @@ const OrderDetailsPage = ({ match }) => {
                         <b> Order Id: </b>
                         {order.Id}
                     </p>
-
+                    <p className="col">
+                    </p>
                     <p className="col">
                         <b> Order Date: </b>
                         {new Date(order.OrderDate).toDateString()}
@@ -85,7 +91,10 @@ const OrderDetailsPage = ({ match }) => {
                         <b> Order Status: </b>
                         {order.OrderStatus}
                     </p>
-
+                    <p className="col">
+                        <b> Order Total Price:  </b>
+                        ${order.TotalPrice}
+                    </p>
                     <p className="col">
                         <b> ShippingAddress: </b>
                         {order.ShippingAddress}
@@ -123,7 +132,14 @@ const OrderDetailsPage = ({ match }) => {
                         {order.Products.map(item =>
                             <tr key={item.ProductId}>
                                 <td>
-                                    {item.Product.ProductName}
+                                    <Input type="select">
+                                        { products.map(product => 
+                                            <option value={product.Id} key={product.Id} >
+                                                {product.ProductName}
+                                            </option>
+                                        )
+                                        }
+                                    </Input>
                                 </td>
                                 <td>
                                     <img src={item.Product.ProductImageUrl} style={{maxWidth:"100px"}}/>
