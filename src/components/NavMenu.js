@@ -28,7 +28,7 @@ export const NavMenu = (props) => {
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/cart"><span>Cart</span> <CartIcon/></NavLink>
                 </NavItem>
-                <NavItem hidden={!isLoggedIn && !isAdmin }>
+                <NavItem hidden={!isLoggedIn || !isAdmin }>
                   <NavLink tag={Link} className="text-dark" to="/admin-panel/account">Admin Panel</NavLink>
                 </NavItem>
                 <NavItem hidden={!isLoggedIn || isAdmin}>
