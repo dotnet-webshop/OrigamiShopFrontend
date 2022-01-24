@@ -78,6 +78,7 @@ const AdminOrdersTable = () => {
                                     </p>
                                 </Accordion.Header>
                                 <Accordion.Body>
+                                    <Link to={`/orders/${order.Id}`}>Edit Order</Link>
                                     <p>
                                         <b>Total Price </b>
                                         ${order.TotalPrice}
