@@ -15,6 +15,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 import AdminRoutes from "./components/Admin/AdminRoutes";
 import ProductDetails from "./components/Product/ProductDetails";
+import OrderDetailsPage from './components/Admin/OrderDetailsPage';
 
 const App = (props) => {
     const dispatch = useDispatch()
@@ -32,6 +33,7 @@ const App = (props) => {
                     <Route exact path='/login' component={LoginPage}/>
                     <Route exact path='/register' component={Register}/>
                     <Route exact path='/product/:productId' component={ProductDetails} />
+                    <ProtectedRoute exact path='/orders/:orderId' adminRoute={true} component={OrderDetailsPage} />
                     <AdminRoutes/>
                 </Switch>
             </Layout>
