@@ -30,12 +30,26 @@ const AdminOrdersTable = () => {
             <h1>Admin Panel - Orders</h1>
             <p>All orders</p>
             <div className="">
-                <div className="row">
-
-                        <div className="col">Order Id</div>
-                        <div className="col">Date Created</div>
-                        <div className="col">Total Price</div>
-                        <div className="col">Status</div>
+                <div className="row">                        
+                    <div className="col">
+                        <b>Order Id</b>
+                    </div>
+                    <div className="col">
+                        <b>Customer Id</b>
+                    </div>
+                    <div className="col">
+                        <b>Date Created</b>
+                    </div>
+                    <div className="col">
+                        <b>
+                            Total Price
+                        </b>
+                    </div>
+                    <div className="col">
+                        <b>
+                            Status
+                        </b>
+                    </div>
                 </div>
                 <div>
                     {orders.map(order => <div key={order.Id}>
@@ -46,9 +60,12 @@ const AdminOrdersTable = () => {
                                     <p className="col">
                                         {order.Id}
                                     </p>
-
                                     <p className="col">
-                                        {order.OrderDate}
+
+                                        {order.CustomerId}
+                                    </p>
+                                    <p className="col">
+                                        {new Date(order.OrderDate).toDateString()}
                                     </p>
 
                                     <p className="col">
@@ -56,47 +73,53 @@ const AdminOrdersTable = () => {
                                     </p>
 
                                     <p className="col">
+
                                         {order.OrderStatus}
                                     </p>
                                 </Accordion.Header>
                                 <Accordion.Body>
                                     <p>
-                                    <b>Total Price </b>
-                                         ${order.TotalPrice}
+                                        <b>Total Price </b>
+                                        ${order.TotalPrice}
                                     </p>
                                     <p>
-                                       <b> Products</b>
+                                        <b>Customer </b>
+                                        {order.CustomerId}
                                     </p>
-                                    { order.Products.map(item => 
-                                    
-                                    <table className="table table-striped" >
-                                        <thead>
-                                            <tr>
-                                            <th>
-                                                Name
-                                            </th>
-                                            <th>
-                                                Price
-                                            </th>
-                                            <th>
-                                                Quantity
-                                            </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    {item.Product.ProductName}
-                                                </td>
-                                                <td>
-                                                    {item.Product.ProductPrice}
-                                                </td>
-                                                <td>
-                                                    {item.Quantity}
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table> )
+
+                                    <p>
+                                        <b> Products</b>
+                                    </p>
+                                    {order.Products.map(item =>
+
+                                        <table className="table table-striped" >
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        Name
+                                                    </th>
+                                                    <th>
+                                                        Price
+                                                    </th>
+                                                    <th>
+                                                        Quantity
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        {item.Product.ProductName}
+                                                    </td>
+                                                    <td>
+                                                        {item.Product.ProductPrice}
+                                                    </td>
+                                                    <td>
+                                                        {item.Quantity}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>)
 
                                     }
                                 </Accordion.Body>
