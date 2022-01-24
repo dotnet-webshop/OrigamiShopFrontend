@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 function LoginPage(){
     const [password,setPassword] = useState("")
     const [email,setEmail] = useState("")
+    const [errorMessage, setErrorMessage] = useState("")
     const [Username,SetUserName] = useState("")
     const user = useSelector(state => state.user)
     const dispatch = useDispatch()
@@ -20,10 +21,11 @@ function LoginPage(){
         setEmail("")
         login(pw,mail).then(
             res => {
-                if(res !== undefined)
-                {
+                if (res !== undefined) {
                     console.log(res.Token)
                     onLogin(res.Token)
+                } else {
+                    setErrorMessage('Error logging in!')
                 }
             }
         )
@@ -38,6 +40,7 @@ function LoginPage(){
                 <Label for="password">Password</Label>
                 <Input value={password} name="password" type="password" onChange={(e)=>setPassword(e.target.value)}/>
                 <small><Link to="/register">Register account</Link></small>
+                <h5 className="text-danger">{errorMessage}</h5>
             </div>
             <Button className="btn btn-primary mt-2" onClick={(e) => onHandleLogin(e)} >Login</Button>
             <div>

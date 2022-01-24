@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import {Button, Input, Label} from "reactstrap";
+import { ProductImageFormComponent } from "./ProductImage"
 
 const EditProductForm = ({product,onSubmit}) => {
 
     const [newProduct,setNewProduct] = useState(product)
-    useEffect(()=> {
+
+    useEffect(() => {
         setNewProduct(product)
     }, [product])
     
@@ -18,6 +20,7 @@ const EditProductForm = ({product,onSubmit}) => {
             console.error("onSubmit prop not set.")
         }
     }
+
     return (
         <form>
             <div>
@@ -26,14 +29,7 @@ const EditProductForm = ({product,onSubmit}) => {
                        value={newProduct.ProductName}
                        onChange={ (e) => setNewProduct({...newProduct,ProductName: e.target.value}) }/>
             </div>
-            <div>
-                <Label  for="Image">Image</Label>
-                <Input
-                    type="text"
-                    value={newProduct.ProductImageUrl}
-                    onChange={(e)=> setNewProduct({...newProduct, ProductImageUrl: e.target.value})}
-                    name="Image"/>
-            </div>
+            <ProductImageFormComponent product={newProduct} setProduct={setNewProduct} />
             <div>
                 <Label for="Price">Product Price</Label>
                 <Input required name="Price" type="number"

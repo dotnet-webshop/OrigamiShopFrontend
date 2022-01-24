@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {deleteById, endpoints, getAll} from "../../services/api";
 import {Button} from "reactstrap";
 import {useSelector} from "react-redux";
+import { Link } from "react-router-dom";
 
 const AdminCustomersTable = () => {
     const [customers,setCustomers] = useState([])
@@ -41,10 +42,12 @@ const AdminCustomersTable = () => {
                 <tbody>
                 {customers.map(customer => <tr key={customer.Id}>
                     <td>{customer.Id}</td>
-                    <td>{customer.FullName}</td>
+                    <td>
+                        <Link to={"/customer/"+customer.Id}>{customer.FullName}</Link>
+                    </td>
                     <td>{customer.Email}</td>
                     <td>{customer.PhoneNumber}</td>
-                    <td><Button disabled color={"danger"} outline onClick={()=> onHandleDelete(customer.Id)}>Delete</Button></td>
+                    <td><Button color={"danger"} outline onClick={()=> onHandleDelete(customer.Id)}>Delete</Button></td>
                 </tr>)}
                 </tbody>
             </table>
