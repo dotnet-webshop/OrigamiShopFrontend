@@ -1,18 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import {Button, Input, Label} from "reactstrap";
-import { ReadProductImages, FormEditProductImage } from "./ProductImage"
+import { ProductImageFormComponent } from "./ProductImage"
 
 const EditProductForm = ({product,onSubmit}) => {
 
     const [newProduct,setNewProduct] = useState(product)
-    const [productImages, setProductImages] = useState([])
 
     useEffect(() => {
         setNewProduct(product)
-
-        var filelist = ReadProductImages();
-        setProductImages(filelist);
-
     }, [product])
     
     const onHandleSubmit = () => {
@@ -26,10 +21,6 @@ const EditProductForm = ({product,onSubmit}) => {
         }
     }
 
-    const selectProductImageList = productImages.map(productImage =>
-        <option value={productImage}>{productImage}</option>
-    );
-
     return (
         <form>
             <div>
@@ -38,7 +29,7 @@ const EditProductForm = ({product,onSubmit}) => {
                        value={newProduct.ProductName}
                        onChange={ (e) => setNewProduct({...newProduct,ProductName: e.target.value}) }/>
             </div>
-            <FormEditProductImage newProduct={newProduct} productImages={productImages} setNewProduct={setNewProduct} />
+            <ProductImageFormComponent product={newProduct} setProduct={setNewProduct} />
             <div>
                 <Label for="Price">Product Price</Label>
                 <Input required name="Price" type="number"
