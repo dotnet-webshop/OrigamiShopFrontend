@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
-import {Button, Input, Label} from "reactstrap";
+import React, { useEffect, useState} from 'react'
+import { Button, Input, Label } from "reactstrap";
+import { ProductImageFormComponent } from "./ProductImage"
 
 const CreateProductForm = ({onCreate}) => {
     const initialProductState = {
@@ -11,7 +12,7 @@ const CreateProductForm = ({onCreate}) => {
         DateCreated:Date.now().toString()
     }
     const [newProduct,setNewProduct] = useState(initialProductState)
-    
+
     const onHandleSubmit = () => {
         if (onCreate)
         {
@@ -22,6 +23,7 @@ const CreateProductForm = ({onCreate}) => {
             console.error("onCreate prop not set.")
         }
     }
+
     return (
         <form>
             <div>
@@ -30,12 +32,7 @@ const CreateProductForm = ({onCreate}) => {
                        value={newProduct.ProductName}
                        onChange={ (e) => setNewProduct({...newProduct,ProductName: e.target.value}) }/>
             </div>
-            <div>
-                <Label  for="Image">Image</Label>
-                <Input
-                    value={newProduct.ProductImageUrl}    
-                    onChange={(e) => setNewProduct({...newProduct, ProductImage: ""})} name="Image" type="image"/>
-            </div>
+            <ProductImageFormComponent product={newProduct} setProduct={setNewProduct} />
             <div>
                 <Label for="Price">Product Price</Label>
                 <Input required name="Price" type="number"
