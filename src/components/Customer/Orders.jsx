@@ -32,7 +32,7 @@ function Orders({orderList}) {
                                     </p>
 
                                     <p className="col">
-                                        {order.OrderDate}
+                                        {new Date(order.OrderDate).toDateString()}
                                     </p>
 
                                     <p className="col">
