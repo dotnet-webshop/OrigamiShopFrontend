@@ -11,8 +11,8 @@ export const ReadProductImages = () => {
 export const ProductImageFormComponent = ({ product, setProduct }) => {
     const [productImages, setProductImages] = useState([])
 
-    const selectProductImageList = productImages.map(productImage =>
-        <option value={productImage}>{productImage}</option>
+    const selectProductImageList = productImages.map((productImage, index) =>
+        <option key={index} value={productImage}>{productImage}</option>
     );
 
     useEffect(() => {
