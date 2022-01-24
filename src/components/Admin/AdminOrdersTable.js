@@ -30,7 +30,7 @@ const AdminOrdersTable = () => {
             <h1>Admin Panel - Orders</h1>
             <p>All orders</p>
             <div className="">
-                <div className="row">                        
+                <div className="row">
                     <div className="col">
                         <b>Order Id</b>
                     </div>
@@ -90,23 +90,23 @@ const AdminOrdersTable = () => {
                                     <p>
                                         <b> Products</b>
                                     </p>
-                                    {order.Products.map(item =>
+                                    <table className="table table-striped" >
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Name
+                                                </th>
+                                                <th>
+                                                    Price
+                                                </th>
+                                                <th>
+                                                    Quantity
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {order.Products.map(item =>
 
-                                        <table className="table table-striped" >
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        Name
-                                                    </th>
-                                                    <th>
-                                                        Price
-                                                    </th>
-                                                    <th>
-                                                        Quantity
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
                                                 <tr>
                                                     <td>
                                                         {item.Product.ProductName}
@@ -118,10 +118,10 @@ const AdminOrdersTable = () => {
                                                         {item.Quantity}
                                                     </td>
                                                 </tr>
-                                            </tbody>
-                                        </table>)
 
-                                    }
+                                            )}
+                                        </tbody>
+                                    </table>
                                 </Accordion.Body>
                             </Accordion.Item>
                         </Accordion>
