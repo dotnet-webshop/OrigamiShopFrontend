@@ -10,7 +10,7 @@ function CustomerDetails({customer}) {
             <div className={"card"} style={{ width: "59rem", marginRight: "1rem", }}>
             
                 <div className="card-header">
-                    <h5 className="card-title"> <strong>Full Name: </strong>{customer.FullName}</h5>
+                    <h5 className="card-title"> <strong>{customer.FullName}</strong></h5>
                 </div>
                 <div className="card-body">
                     

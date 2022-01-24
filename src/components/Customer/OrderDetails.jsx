@@ -6,14 +6,43 @@ function OrderDetails({Items}) {
     console.table(Items);
     return (
        
-            Items.map(item =>
-                <div key={item.Product.Id}>
-                    <ul className="list-group list-group-flush" >
-                        <li className="list-group-item">Product: {item.Product.ProductName}</li>
-                        <li className="list-group-item">Price: {item.Product.ProductPrice}</li>
-                        <li className="list-group-item">Quantity: {item.Quantity}</li>
-                    </ul> 
-               </div> )
+        Items.map(item =>
+            <div key={item.Product.Id}>
+                <table className="table table-striped" >
+                    <thead>
+                        <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                        <th>
+                            Quantity
+                        </th>
+                        <th>
+                            Shipping Address
+                        </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                {item.Product.ProductName}
+                            </td>
+                            <td>
+                                {item.Product.ProductPrice}
+                            </td>
+                            <td>
+                                {item.Quantity}
+                            </td>
+                            <td>
+                                {item.ShippingAddress}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div> )
     );
 }
 
