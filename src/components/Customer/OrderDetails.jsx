@@ -20,9 +20,6 @@ function OrderDetails({Items}) {
                         <th>
                             Quantity
                         </th>
-                        <th>
-                            Shipping Address
-                        </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,13 +28,10 @@ function OrderDetails({Items}) {
                                 {item.Product.ProductName}
                             </td>
                             <td>
-                                {item.Product.ProductPrice}
+                                ${item.Product.ProductPrice}
                             </td>
                             <td>
                                 {item.Quantity}
-                            </td>
-                            <td>
-                                {item.ShippingAddress}
                             </td>
                         </tr>
                     </tbody>

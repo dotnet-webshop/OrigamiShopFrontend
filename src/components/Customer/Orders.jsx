@@ -7,26 +7,25 @@ import OrderDetails from "./OrderDetails";
 function Orders({orderList}) {
     console.log(orderList);
     
-    
-
-
     return (
         <div >
-           <p> Orders</p>
-            <div className="">
+           <h4><small className="text-muted">  Orders</small></h4>
+           <br></br>
+            <div className="bg-success p-2 text-dark bg-opacity-25">
                 <div className="row">
 
-                        <div className="col">Order Number</div>
-                        <div className="col">Date Created</div>
-                        <div className="col">Total Price</div>
-                        <div className="col">Status</div>
+                    <div className="col">Order Number</div>
+                    <div className="col">Date Created</div>
+                    <div className="col">Status</div>
+                    <div className="col">Shipping Address</div>
+                    <div className="col">Total Price</div>
                 </div>
-                <div>
+                <div >
                     {orderList.map(order => <div key={order.Id}>
 
-                        <Accordion>
+                        <Accordion >
                             <Accordion.Item eventKey="0">
-                                <Accordion.Header className="row">
+                                <Accordion.Header className="row" >
                                     <p className="col">
                                         {order.Id}
                                     </p>
@@ -36,11 +35,15 @@ function Orders({orderList}) {
                                     </p>
 
                                     <p className="col">
-                                      ${order.TotalPrice}
+                                     &nbsp;&nbsp;&nbsp;  {order.OrderStatus}
                                     </p>
 
                                     <p className="col">
-                                        {order.OrderStatus}
+                                     &nbsp; &nbsp;&nbsp;&nbsp; {order.ShippingAddress}
+                                    </p>
+
+                                    <p className="col">
+                                    &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; ${order.TotalPrice}
                                     </p>
                                 </Accordion.Header>
                                 <Accordion.Body>

@@ -30,7 +30,7 @@ export const CustomerProfile = () => {
             <div >
                 
                 <CustomerDetails customer={customer} />
-                
+                <br></br>
                 <Orders orderList={customer.Orders} />       
             </div>
     )
