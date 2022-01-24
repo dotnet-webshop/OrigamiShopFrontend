@@ -22,7 +22,7 @@ axios.defaults.baseURL = apiBaseUrl;
 
 
 export const login = async (pw, mail) => {
-    return await axios.post(endpoints.login, {
+    return await axios.post(endpoints.login, {  
         Email: mail,
         Password: pw
     }).then((res) => {
