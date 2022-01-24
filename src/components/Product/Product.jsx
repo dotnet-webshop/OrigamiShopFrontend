@@ -8,7 +8,7 @@ function Product(props){
     const {addProductToCart} = bindActionCreators(cartActions, dispatch)
     return(
         <div className={"product card"} style={{width:"18rem",marginRight:"1rem"}}>
-            <img className="card-img-top" src={props.product.ProductImage} alt="product image"/>
+            <img className="card-img-top" src={props.product.ProductImageUrl} alt="product image"/>
             <div className="card-body">
                 <h5 className="card-title d-flex">
                     <span className="flex-fill">
