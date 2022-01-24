@@ -7,7 +7,7 @@ import {About} from './components/About';
 import Cart from "./components/Cart/Cart";
 import LoginPage from "./components/Login/LoginPage";
 import Register from "./components/Register/Register";
-import {CustomerProfile} from './components/CustomerProfile';
+import {CustomerProfile} from './components/Customer/CustomerProfile';
 import {userActions} from "./state/actions/index";
 import {useDispatch} from "react-redux";
 import {bindActionCreators} from "redux";
