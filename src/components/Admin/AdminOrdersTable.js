@@ -16,7 +16,7 @@ const AdminOrdersTable = () => {
         .then( res => {
             console.log(res);
             let index = orders.findIndex( e => e.Id === Id)
-            if (iindexd >= 0)
+            if (index >= 0)
             {
                 let newOrders = [...orders]
                 newOrders.splice(index , 1,)
@@ -34,7 +34,8 @@ const AdminOrdersTable = () => {
             <table className="table table-striped">
                 <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>Order Id</th>
+                    <th>Date Created</th>
                     <th>Total Price</th>
                     <th>Customer Id</th>
                     <th>Shipping Address</th>
@@ -44,6 +45,7 @@ const AdminOrdersTable = () => {
                 <tbody>
                 {orders.map(order => <tr key={order.Id}>
                     <td>{order.Id}</td>
+                    <td>{new Date(order.OrderDate).toISOString().split('T')[0]}</td>
                     <td>{order.TotalPrice}</td>
                     <td>
                         <Link to={"/customer/"+order.CustomerId}>{order.CustomerId}</Link>
@@ -51,7 +53,7 @@ const AdminOrdersTable = () => {
                     <td>{order.ShippingAddress}</td>
                     <td>{order.OrderStatus}</td>
                     <td>
-                        <Button
+                        <Button color="danger" outline
                             onClick={() =>onHandleDelete(order.Id) }
                         >Delete</Button>
                     </td>
