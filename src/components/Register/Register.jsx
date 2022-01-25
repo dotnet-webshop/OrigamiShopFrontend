@@ -3,7 +3,6 @@ import {Button, Input, Label, Col} from "reactstrap";
 import {Link} from "react-router-dom";
 import {register} from "../../services/api";
 import Form from 'react-bootstrap/Form'
-import InputGroup from 'react-bootstrap/InputGroup'
 
 function Register(){
     const [confirmPassword,setConfirmPassword] = useState("")
