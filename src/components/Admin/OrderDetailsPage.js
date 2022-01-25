@@ -1,9 +1,9 @@
 // details about an order and the option for a admin to edit that order
 
 import { useEffect, useState } from "react"
-import { endpoints, updateById ,  getAll, getOne, deleteById } from "../../services/api"
+import { endpoints, updateById, getAll, getOne, deleteById } from "../../services/api"
 import { Button, Input } from "reactstrap"
-import { Redirect , useHistory } from "react-router-dom"
+import { Redirect, useHistory } from "react-router-dom"
 
 const OrderDetailsPage = ({ match }) => {
 
@@ -29,48 +29,66 @@ const OrderDetailsPage = ({ match }) => {
         TotalPrice: 0
     })
 
+    const [newItem, setNewItem] = useState({
+        ProductId: 1,
+        Product: {},
+        Quantity: 1
+    });
 
+    const onAddNewItem = () => {
+        if (order.Products.includes(i => i.ProductId === newItem.ProductId)){
+            return;
+        }
+        setOrder({ ...order, Products: [...order.Products, newItem] })
+        setNewItem({})
+    }
     const onHandleDelete = () => {
-        deleteById(endpoints.orders,order.Id)
-        .then(res => {
-            history.goBack();
-        })
+        deleteById(endpoints.orders, order.Id)
+            .then(res => {
+                history.goBack();
+            })
     }
 
     const save = () => {
-        let payload = {...order, Products: [...order.Products]}
+        let payload = { ...order, Products: [...order.Products] }
 
         updateById(
             endpoints.orders,
             order.Id,
             payload
         ).then(
-            data =>setOrder({...data})
+            data => setOrder({ ...data })
         )
     }
 
-    const setItemQuantity = (index,amount) => {
+    const setItemQuantity = (index, amount) => {
         let updatedItems = [...order.Products]
-        updatedItems[index] = {...updatedItems[index],Quantity:amount}
-        setOrder({...order, Products: updatedItems})
+        updatedItems[index] = { ...updatedItems[index], Quantity: amount }
+        setOrder({ ...order, Products: updatedItems })
     }
 
-    const onHandleSelectItem = (id,index) => {
-        console.log({"id":id,"index":index})
+    const onHandleSelectItem = (id, index) => {
+        console.log({ "id": id, "index": index })
         const product = products.find(p => p.Id === parseInt(id))
-        if (product !== undefined)
-        {
+        if (product !== undefined) {
             let newProducts = [...order.Products]
-            newProducts[index] = {...newProducts[index], Product:product , ProductId:product.Id}
-            setOrder({...order,Products:newProducts})
+            newProducts[index] = { ...newProducts[index], Product: product, ProductId: product.Id }
+            setOrder({ ...order, Products: newProducts })
         }
-        
-    }
 
+    }
+    const removeOrderItem = (index) => {
+        if (index > -1)
+        {
+            let items = [...order.Products]
+            items.splice(index,1)
+            setOrder({...order,Products: items})
+        }
+    }
     const onSelectCustomer = (id) => {
         const c = customers.find(e => e.Id === id)
         if (c !== undefined) {
-            setOrder( {...order,CustomerId:c.Id})
+            setOrder({ ...order, CustomerId: c.Id })
         }
     }
     useEffect(() => {
@@ -175,11 +193,40 @@ const OrderDetailsPage = ({ match }) => {
                 </thead>
 
                 <tbody>
-                    {order.Products.map( (item, index) =>
-                        <tr key={item.ProductId}>
+
+                    <tr className="my-5">
+                        <td>
+                            <Input type="select"
+                            onChange={(e) => setNewItem({...newItem, Product: products.find( p => p.Id === parseInt(e.target.value))})} >
+                                {products.map(p =>
+                                    <option value={p.Id} key={p.Id} >
+                                        {p.ProductName}
+                                    </option>
+                                )
+                                }
+                            </Input>
+                        </td>
+                        <td>
+                            <img src={newItem.Product?.ProductImageUrl} style={{ maxWidth: "100px" }} />
+                        </td>
+                        <td>
+                            {newItem.Product?.ProductPrice}
+                        </td>
+                        <td>
+                            <Input type="number"
+                                min={1} max={newItem.Product?.Stock}
+                                defaultValue={newItem.Quantity}
+                                onChange={(e) => setNewItem({ ...newItem, Quantity: e.target.valueAsNumber })} />
+                        </td>
+                        <td>
+                            <Button onClick={()=>onAddNewItem()} color="primary" outline >Add Item</Button>
+                        </td>
+                    </tr>
+                    {order.Products.map((item, index) =>
+                        <tr key={item.ProductId + "" + index}>
                             <td>
-                                <Input type="select" onChange={(e)=>onHandleSelectItem(e.target.value,index)}>
-                                    {products.map( p =>
+                                <Input type="select" onChange={(e) => onHandleSelectItem(e.target.value, index)}>
+                                    {products.map(p =>
                                         <option value={p.Id} key={p.Id} >
                                             {p.ProductName}
                                         </option>
@@ -188,19 +235,23 @@ const OrderDetailsPage = ({ match }) => {
                                 </Input>
                             </td>
                             <td>
-                                <img src={item.Product.ProductImageUrl} style={{ maxWidth: "100px" }} />
+                                <img src={item?.Product?.ProductImageUrl} style={{ maxWidth: "100px" }} />
                             </td>
                             <td>
-                                {item.Product.ProductPrice}
+                                {item?.Product?.ProductPrice}
                             </td>
                             <td>
                                 <Input type="number"
-                                min={1} max={item.Product.Stock} 
-                                value={item.Quantity}  
-                                onChange={(e) => setItemQuantity(index, e.target.valueAsNumber)} />
+                                    min={1} max={item?.Product?.Stock}
+                                    value={item.Quantity}
+                                    onChange={(e) => setItemQuantity(index, e.target.valueAsNumber)} />
+                            </td>
+                            <td>
+                                <Button onClick={() => removeOrderItem(index)} outline color="danger">- Remove</Button>
                             </td>
                         </tr>
                     )}
+
                 </tbody>
             </table>
         </section>
