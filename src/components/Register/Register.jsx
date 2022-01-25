@@ -53,8 +53,13 @@ function Register(){
         <div className="">
             <h2>Register User</h2>
             <div>
-                <form  noValidate validated={validated} >
+                <Form  noValidate validated={validated} >
                     {/* <Label for="fullName">Full Name</Label> */}
+                    {/* <Input value={newUser.FullName} name="fullName" 
+                        type="text" 
+                        onChange={(e)=>setNewUser({...newUser,FullName: e.target.value})}
+                    /> */}
+                
                     <Form.Group as={Col} md="4" controlId="validationCustom01">
                         <Form.Label>Full Name</Form.Label>
                         <Form.Control
@@ -65,11 +70,8 @@ function Register(){
                         />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
-                    {/* <Input value={newUser.FullName} name="fullName" 
-                        type="text" 
-                        onChange={(e)=>setNewUser({...newUser,FullName: e.target.value})}
-                    /> */}
-                
+                    <br />
+                    
                     {/* <Label for="email">Email</Label>
                     <Input value={newUser.Email} name="email" 
                         onChange={(e)=>setNewUser({...newUser,Email:e.target.value})} 
@@ -78,9 +80,7 @@ function Register(){
 
                     <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label>Email</Form.Label>
-                        <InputGroup hasValidation>
-                            <InputGroup.Text id="inputGroupPrepend"></InputGroup.Text>
-                            <Form.Control
+                        <Form.Control
                             type="email"
                             aria-describedby="inputGroupPrepend"
                             value={newUser.Email} name="email" 
@@ -90,9 +90,8 @@ function Register(){
                             <Form.Control.Feedback type="invalid">
                             Please provide a valid Email.
                             </Form.Control.Feedback>
-                        </InputGroup>
                     </Form.Group>
-                    
+                    <br />
                     
                     {/* <Label for="billingAddress">Billing Address</Label>
                     <Input value={newUser.BillingAddress} 
@@ -112,7 +111,8 @@ function Register(){
                             Please provide a valid Address.
                         </Form.Control.Feedback>
                     </Form.Group>
-                    
+                    <br />
+
                     {/* <Label for="zipCode">Zip Code</Label>
                     <Input value={newUser.ZipCode} name="zipCode" onChange={(e)=>setNewUser({...newUser,ZipCode:e.target.value})} 
                         type={"text"}/> */}
@@ -127,7 +127,8 @@ function Register(){
                             Please provide a valid Zip Code.
                         </Form.Control.Feedback>
                     </Form.Group>
-                
+                    <br />
+
                     {/* <Label for="country">Country</Label>
                     <Input value={newUser.Country} name="country" onChange={(e)=>setNewUser({...newUser,Country:e.target.value})} 
                         type={"text"}/> */}
@@ -142,6 +143,7 @@ function Register(){
                             Please provide a valid Country.
                         </Form.Control.Feedback>
                     </Form.Group>
+                    <br />
 
                     {/* <Label for="password">Password</Label>
                     <Input value={newUser.Password} name="password" 
@@ -159,6 +161,7 @@ function Register(){
                             Please provide a valid Password.
                         </Form.Control.Feedback>
                     </Form.Group>
+                    <br />
 
                     {/* <Label for="confirmPassword">Confirm Password</Label>
                     <Input value={confirmPassword} name="confirmPassword" type="password" 
@@ -171,7 +174,8 @@ function Register(){
                             Please confirm your Password.
                         </Form.Control.Feedback>
                     </Form.Group>
-
+                    <br />
+                    <br />
                     <Form.Group className="mb-3">
                         <Form.Check
                         required
@@ -180,14 +184,15 @@ function Register(){
                         feedbackType="invalid"
                         />
                     </Form.Group>
-
+                    
                     <Button disabled={confirmPassword !== newUser.Password || newUser.Password === ""} 
                         className="btn btn-primary mt-2" 
                         onClick={(e) => onHandleRegister(e)}>
                     Register
                     </Button>
-                </form>
+                </Form>
             </div>
+            <br />
             <small><Link to="/login">Sign in</Link></small>
         </div>
     )
