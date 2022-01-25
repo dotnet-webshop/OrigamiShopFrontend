@@ -70,7 +70,7 @@ function Register(){
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                     </Form.Group>
                     <br />
-                    
+                     
                     {/* <Label for="email">Email</Label>
                     <Input value={newUser.Email} name="email" 
                         onChange={(e)=>setNewUser({...newUser,Email:e.target.value})} 
