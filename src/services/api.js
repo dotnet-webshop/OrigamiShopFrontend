@@ -63,6 +63,13 @@ export const create = async (endpoint, payload) => {
         .catch(() => null);
 }
 
+export const createReturnsResponse = async (endpoint, payload) => {
+    setAuthToken()
+    return await axios.post(endpoint, payload)
+        .then(result => result)
+        .catch((error) => error.response);
+}
+
 export const register = async (user) => {
     setAuthToken()
     return await axios.post(endpoints.register, user).then((res) => {

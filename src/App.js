@@ -5,9 +5,10 @@ import {Home} from './components/Home';
 import './custom.css'
 import {About} from './components/About';
 import Cart from "./components/Cart/Cart";
+import Reciept from "./components/Cart/Receipt"
 import LoginPage from "./components/Login/LoginPage";
 import Register from "./components/Register/Register";
-import {CustomerProfile} from './components/CustomerProfile';
+import {CustomerProfile} from './components/Customer/CustomerProfile';
 import {userActions} from "./state/actions/index";
 import {useDispatch} from "react-redux";
 import {bindActionCreators} from "redux";
@@ -38,6 +39,7 @@ const App = (props) => {
                     <Route exact path='/login' component={LoginPage}/>
                     <Route exact path='/register' component={Register}/>
                     <Route exact path='/product/:productId' component={ProductDetails} />
+                    <Route exact path='/cart/receipt/' component={Reciept} />
                     <Route exact path="/404" component={NotFoundPage} />
                     <ProtectedRoute exact path='/admin-panel/account' adminRoute={true} component={AdminAccount} />
                     <ProtectedRoute exact path='/admin-panel/products' adminRoute={true} component={AdminProductTable} />
