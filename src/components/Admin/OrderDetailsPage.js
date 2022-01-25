@@ -6,15 +6,16 @@ import { Button, Input } from "reactstrap"
 
 const OrderDetailsPage = ({ match }) => {
 
-    const [products,setProducts] = useState([])
+    const [products, setProducts] = useState([])
+    const [customers, setCustomers] = useState([])
 
-    const [customer, setCustomer] = useState({
-        Id: "",
-        FullName: "",
-        Email: "",
-        PhoneNumber: ""
-    })
 
+    const statuses = [
+        "Processing",
+        "Cancelled",
+        "Deliverd",
+        "PickupAvailable"
+    ]
     const [order, setOrder] = useState({
         Id: 0,
         OrderDate: "",
@@ -38,16 +39,44 @@ const OrderDetailsPage = ({ match }) => {
 
     }
 
+    const setItemQuantity = (index,amount) => {
+        let updatedItems = [...order.Products]
+        updatedItems[index] = {...updatedItems[index],Quantity:amount}
+        setOrder({...order, Products: updatedItems})
+    }
+
+    const onHandleSelectItem = (id,index) => {
+        console.log({"id":id,"index":index})
+        const product = products.find(p => p.Id === parseInt(id))
+        if (product !== undefined)
+        {
+            let newProducts = [...order.Products]
+            newProducts[index] = {...newProducts[index], Product:product}
+            setOrder({...order,Products:[...newProducts]})
+        }
+        
+    }
+
+    const onSelectCustomer = (id) => {
+        const c = customers.find(e => e.Id === id)
+        if (c !== undefined) {
+            setOrder( {...order,CustomerId:c.Id})
+            setSelectedCustomer(c);
+        }
+    }
     useEffect(() => {
         getOne(endpoints.orders, match.params.orderId)
-            .then(p => {
-                if (p !== null) {
-                    setOrder({ ...p })
+            .then(o => {
+                if (o !== null) {
+                    setOrder({ ...o })
                     getAll(endpoints.products)
-                    .then(data => setProducts(data))
+                        .then(data => setProducts(data))
 
-                    getOne(endpoints.customers, order.CustomerId)
-                        .then(data => setCustomer(data))
+                    getAll(endpoints.customers)
+                        .then(data => {
+                            setCustomers(data)
+                            onSelectCustomer(order.CustomerId)
+                        })
                 }
             })
     }, [match])
@@ -65,7 +94,6 @@ const OrderDetailsPage = ({ match }) => {
 
                 <div className="col">
                     <div>
-
                         <Button outline color="primary" className="mr-5" onClick={() => save()} >Save Edits</Button>
                     </div>
                 </div>
@@ -89,7 +117,16 @@ const OrderDetailsPage = ({ match }) => {
                 <div className="row mt-5">
                     <p className="col">
                         <b> Order Status: </b>
-                        {order.OrderStatus}
+                        <Input type="select" value={order.OrderStatus}
+                            onChange={(e) => setOrder({ ...order, OrderStatus: e.target.value })}>
+                            {
+                                statuses.map(status =>
+                                    <option value={status} key={status}>
+                                        {status}
+                                    </option>)
+                            }
+                        </Input>
+
                     </p>
                     <p className="col">
                         <b> Order Total Price:  </b>
@@ -97,7 +134,8 @@ const OrderDetailsPage = ({ match }) => {
                     </p>
                     <p className="col">
                         <b> ShippingAddress: </b>
-                        {order.ShippingAddress}
+                        <Input type="text" placeholder="Address" value={order.ShippingAddress}
+                            onChange={(e) => setOrder({ ...order, ShippingAddress: e.target.value })} />
                     </p>
                 </div>
             </div>
@@ -105,15 +143,14 @@ const OrderDetailsPage = ({ match }) => {
             <div>
                 <h4>Customer</h4>
                 <div className="row mt-5">
-                    <p className="col">
-                        <b> Customer Name: </b>
-                        {customer.FullName}
-                    </p>
-
-                    <p className="col">
-                        <b> Email: </b>
-                        {customer.Email}
-                    </p>
+                    <Input type="select" value={order.CustomerId} onChange={(e) => onSelectCustomer(e.target.value)} >
+                        {
+                            customers.map(c =>
+                                <option value={c.Id} key={c.Id}>
+                                    {c.Email}
+                                </option>)
+                        }
+                    </Input>
                 </div>
             </div>
             <hr></hr>
@@ -128,31 +165,34 @@ const OrderDetailsPage = ({ match }) => {
                     </tr>
                 </thead>
 
-                    <tbody>
-                        {order.Products.map(item =>
-                            <tr key={item.ProductId}>
-                                <td>
-                                    <Input type="select">
-                                        { products.map(product => 
-                                            <option value={product.Id} key={product.Id} >
-                                                {product.ProductName}
-                                            </option>
-                                        )
-                                        }
-                                    </Input>
-                                </td>
-                                <td>
-                                    <img src={item.Product.ProductImageUrl} style={{maxWidth:"100px"}}/>
-                                </td>
-                                <td>
-                                    {item.Product.ProductPrice}
-                                </td>
-                                <td>
-                                    {item.Quantity}
-                                </td>
-                            </tr>
-                        )}
-                    </tbody>
+                <tbody>
+                    {order.Products.map( (item, index) =>
+                        <tr key={item.ProductId}>
+                            <td>
+                                <Input type="select" onChange={(e)=>onHandleSelectItem(e.target.value,index)}>
+                                    {products.map( p =>
+                                        <option value={p.Id} key={p.Id} >
+                                            {p.ProductName}
+                                        </option>
+                                    )
+                                    }
+                                </Input>
+                            </td>
+                            <td>
+                                <img src={item.Product.ProductImageUrl} style={{ maxWidth: "100px" }} />
+                            </td>
+                            <td>
+                                {item.Product.ProductPrice}
+                            </td>
+                            <td>
+                                <Input type="number" min={1} max={item.Product.Stock} value={item.Quantity}  
+                                onChange={(e) => setItemQuantity(index, e.target.valueAsNumber)}
+                                />
+                                {item.Quantity}
+                            </td>
+                        </tr>
+                    )}
+                </tbody>
             </table>
         </section>
     )
