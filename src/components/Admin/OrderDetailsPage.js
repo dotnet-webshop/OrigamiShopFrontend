@@ -1,15 +1,15 @@
 // details about an order and the option for a admin to edit that order
 
 import { useEffect, useState } from "react"
-import { endpoints, getAll, getOne } from "../../services/api"
+import { endpoints, updateById ,  getAll, getOne, deleteById } from "../../services/api"
 import { Button, Input } from "reactstrap"
+import { Redirect , useHistory } from "react-router-dom"
 
 const OrderDetailsPage = ({ match }) => {
 
     const [products, setProducts] = useState([])
     const [customers, setCustomers] = useState([])
-
-
+    const history = useHistory();
     const statuses = [
         "Processing",
         "Cancelled",
@@ -29,14 +29,24 @@ const OrderDetailsPage = ({ match }) => {
         TotalPrice: 0
     })
 
-    const [showModal, setShowModal] = useState(false)
 
     const onHandleDelete = () => {
-        setShowModal(true)
+        deleteById(endpoints.orders,order.Id)
+        .then(res => {
+            history.goBack();
+        })
     }
 
     const save = () => {
+        let payload = {...order, Products: [...order.Products]}
 
+        updateById(
+            endpoints.orders,
+            order.Id,
+            payload
+        ).then(
+            data =>setOrder({...data})
+        )
     }
 
     const setItemQuantity = (index,amount) => {
@@ -51,8 +61,8 @@ const OrderDetailsPage = ({ match }) => {
         if (product !== undefined)
         {
             let newProducts = [...order.Products]
-            newProducts[index] = {...newProducts[index], Product:product}
-            setOrder({...order,Products:[...newProducts]})
+            newProducts[index] = {...newProducts[index], Product:product , ProductId:product.Id}
+            setOrder({...order,Products:newProducts})
         }
         
     }
@@ -61,14 +71,13 @@ const OrderDetailsPage = ({ match }) => {
         const c = customers.find(e => e.Id === id)
         if (c !== undefined) {
             setOrder( {...order,CustomerId:c.Id})
-            setSelectedCustomer(c);
         }
     }
     useEffect(() => {
         getOne(endpoints.orders, match.params.orderId)
             .then(o => {
                 if (o !== null) {
-                    setOrder({ ...o })
+                    setOrder(o)
                     getAll(endpoints.products)
                         .then(data => setProducts(data))
 
@@ -185,10 +194,10 @@ const OrderDetailsPage = ({ match }) => {
                                 {item.Product.ProductPrice}
                             </td>
                             <td>
-                                <Input type="number" min={1} max={item.Product.Stock} value={item.Quantity}  
-                                onChange={(e) => setItemQuantity(index, e.target.valueAsNumber)}
-                                />
-                                {item.Quantity}
+                                <Input type="number"
+                                min={1} max={item.Product.Stock} 
+                                value={item.Quantity}  
+                                onChange={(e) => setItemQuantity(index, e.target.valueAsNumber)} />
                             </td>
                         </tr>
                     )}
