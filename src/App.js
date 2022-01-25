@@ -5,6 +5,7 @@ import {Home} from './components/Home';
 import './custom.css'
 import {About} from './components/About';
 import Cart from "./components/Cart/Cart";
+import Reciept from "./components/Cart/Receipt"
 import LoginPage from "./components/Login/LoginPage";
 import Register from "./components/Register/Register";
 import {CustomerProfile} from './components/Customer/CustomerProfile';
@@ -32,6 +33,7 @@ const App = (props) => {
                     <Route exact path='/login' component={LoginPage}/>
                     <Route exact path='/register' component={Register}/>
                     <Route exact path='/product/:productId' component={ProductDetails} />
+                    <Route exact path='/cart/receipt/' component={Reciept} />
                     <AdminRoutes/>
                 </Switch>
             </Layout>
