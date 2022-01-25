@@ -134,11 +134,15 @@ const OrderDetailsPage = ({ match }) => {
                         <b> Order Id: </b>
                         {order.Id}
                     </p>
+
                     <p className="col">
+                        <b> Order Total Price:  </b>
+                        ${order.TotalPrice}
                     </p>
                     <p className="col">
                         <b> Order Date: </b>
-                        {new Date(order.OrderDate).toDateString()}
+                        <Input type="date" defaultValue={order.OrderDate.substring(0,10)}
+                        onChange={(e)=> setOrder({...order,OrderDate:e.target.valueAsDate.toISOString()})}></Input>
                     </p>
                 </div>
                 <div className="row mt-5">
@@ -155,10 +159,7 @@ const OrderDetailsPage = ({ match }) => {
                         </Input>
 
                     </p>
-                    <p className="col">
-                        <b> Order Total Price:  </b>
-                        ${order.TotalPrice}
-                    </p>
+
                     <p className="col">
                         <b> ShippingAddress: </b>
                         <Input type="text" placeholder="Address" value={order.ShippingAddress}
@@ -219,7 +220,7 @@ const OrderDetailsPage = ({ match }) => {
                                 onChange={(e) => setNewItem({ ...newItem, Quantity: e.target.valueAsNumber })} />
                         </td>
                         <td>
-                            <Button onClick={()=>onAddNewItem()} color="primary" outline >Add Item</Button>
+                            <Button onClick={()=>onAddNewItem()} color="primary" outline >+ Add Item</Button>
                         </td>
                     </tr>
                     {order.Products.map((item, index) =>
