@@ -2,8 +2,7 @@ import AdminNav from "../Cart/AdminNav";
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { deleteById, endpoints, getAll } from "../../services/api";
-//import { Accordion } from 'react-bootstrap';
-import { Button, AccordionBody, AccordionHeader } from "reactstrap";
+import { Accordion } from 'react-bootstrap';
 
 const AdminOrdersTable = () => {
     const [orders, setOrders] = useState([])
