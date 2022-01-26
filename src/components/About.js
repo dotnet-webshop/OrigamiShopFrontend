@@ -8,7 +8,7 @@ export class About extends Component {
         
         return (
             <div>
-                <h1>About <small className="text-muted">Origami Webshop</small></h1>
+                <h3>About <small className="text-muted">Origami Webshop</small></h3>
 
 
                 <p>This is an Origami web shop that "sells" handmade origami created from professional artisans.
@@ -17,7 +17,7 @@ export class About extends Component {
                     in a single page without reloading.
                 </p>
 
-                <h3>Project’s Features:</h3>
+                <h5>Project’s Features:</h5>
                 <p><strong>Admin:</strong></p>
                 <ul>
                     <li>The admin interface is able to edit products, users, orders, etc..</li>
@@ -55,7 +55,7 @@ export class About extends Component {
                     
                 </ol>
 
-                <p><strong>Authors:</strong></p>
+                <p><strong>Contributors:</strong></p>
                 <ul className="list-inline">
                     <li className="list-inline-item"><a href='https://github.com/KimRoys'>Kim Roysdotter, </a></li>
                     <li className="list-inline-item"><a href='https://github.com/Nekooos'>Kristoffer, </a></li>
