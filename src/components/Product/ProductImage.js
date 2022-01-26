@@ -27,7 +27,7 @@ export const ProductImageFormComponent = ({ product, setProduct }) => {
             <div className="row">
                 <div className="col-lg-10">
                     <select className="form-control"
-                        value={product.ProductImageUrl}
+                        defaultValue={productImages[0]}
                         onChange={(e) => setProduct({ ...product, ProductImageUrl: e.target.value })}
                         name="Image" type="image">
                         {selectProductImageList}

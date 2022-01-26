@@ -19,22 +19,22 @@ const CreateProductForm = ({onCreate}) => {
     const [validated, setValidated] = useState(false);
     
     const onHandleSubmit = (e) => {
-       
+        setValidated(true);
+        e.preventDefault();
+        e.stopPropagation();
         const form = e.currentTarget;
-        let {  min, max } = e.target;
-        newProduct.Stock = e.target;
-        newProduct.Stock  = Math.max(Number(min), Math.min(Number(max), Number(newProduct.Stock )));
         console.log(form.checkValidity())
         if (form.checkValidity() === false) {
             e.preventDefault();
             e.stopPropagation();
+            setValidated(true);
             return
         }
-        setValidated(true);
         if (onCreate )
         {
             onCreate(newProduct)
             setNewProduct({...initialProductState});
+            setValidated(false);
         }
         else {
             console.error("onCreate prop not set.")
@@ -53,9 +53,7 @@ const CreateProductForm = ({onCreate}) => {
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
-            <br />
             <ProductImageFormComponent product={newProduct} setProduct={setNewProduct} />
-            <br />
             <Form.Group as={Col} md="4" controlId="validationCustom02">
                 <Form.Label>Product Price</Form.Label>
                 <Form.Control
@@ -69,7 +67,6 @@ const CreateProductForm = ({onCreate}) => {
                    Please provide a valid Product Price.
                 </Form.Control.Feedback>
             </Form.Group>
-            <br />
            <Form.Group as={Col} md="6" controlId="validationCustom03">
                 <Form.Label>Product Description</Form.Label>
                 <Form.Control 
@@ -82,21 +79,18 @@ const CreateProductForm = ({onCreate}) => {
                     Please provide a valid Description.
                 </Form.Control.Feedback>
             </Form.Group>
-            <br />
             <Form.Group as={Col} md="6" controlId="validationCustom04">
                 <Form.Label>Stock</Form.Label>
                 <Form.Control 
                     required  
                     name="Stock" type="number" min="1"
-                    max="250"
                     value={newProduct.Stock}
-                    onChange={ (e) => setNewProduct({...newProduct,Stock:e.target.value}) }/>
+                    onChange={ (e) => setNewProduct({...newProduct,Stock:e.target.valueAsNumber}) }/>
                 <Form.Control.Feedback type="invalid">
                     Please provide a valid Stock number.
                 </Form.Control.Feedback>
             </Form.Group>
-            <br />
-            <Button type="submit">Create</Button>
+            <Button color='primary' outline className='my-2' type="submit">Create</Button>
             {/* <Button onClick={(e) => onHandleSubmit(e)}>Create</Button> */}
         </Form>
 
