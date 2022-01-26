@@ -43,11 +43,20 @@ function LoginPage(){
                 <h5 className="text-danger">{errorMessage}</h5>
             </div>
             <Button className="btn btn-primary mt-2" onClick={(e) => onHandleLogin(e)} >Login</Button>
-            <div>
-                <small className="mr-2">Admin email: admin@admin.com</small>
-                <small>Admin pw: virge3d</small>
+            <div className="mt-5">
+                <div className="row">
+                    <small className="col"><b> Admin email</b> admin@admin.com</small>
+                </div>
+                <div className="row">
+                    <small className="col"> <b> Admin password</b> virge3d</small>
+                </div>
+                <div className="row mt-2">
+                    <small className="col"><b> User email</b> user@user.com</small>
+                </div>
+                <div className="row">
+                    <small className="col"> <b> User password</b> virge3d</small>
+                </div>
             </div>
-
         </div>
     )
     return (

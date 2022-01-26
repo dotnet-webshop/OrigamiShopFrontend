@@ -2,8 +2,7 @@ import AdminNav from "../Cart/AdminNav";
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { deleteById, endpoints, getAll } from "../../services/api";
-//import { Accordion } from 'react-bootstrap';
-import { Button, AccordionBody, AccordionHeader } from "reactstrap";
+import { Accordion } from 'react-bootstrap';
 
 const AdminOrdersTable = () => {
     const [orders, setOrders] = useState([])
@@ -30,7 +29,7 @@ const AdminOrdersTable = () => {
             <h1>Admin Panel - Orders</h1>
             <p>All orders</p>
             <div className="">
-                <div className="row">                        
+                <div className="row">
                     <div className="col">
                         <b>Order Id</b>
                     </div>
@@ -78,6 +77,7 @@ const AdminOrdersTable = () => {
                                     </p>
                                 </Accordion.Header>
                                 <Accordion.Body>
+                                    <Link to={`/orders/${order.Id}`}>Edit Order</Link>
                                     <p>
                                         <b>Total Price </b>
                                         ${order.TotalPrice}
@@ -90,24 +90,24 @@ const AdminOrdersTable = () => {
                                     <p>
                                         <b> Products</b>
                                     </p>
-                                    {order.Products.map(item =>
+                                    <table className="table table-striped" >
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Name
+                                                </th>
+                                                <th>
+                                                    Price
+                                                </th>
+                                                <th>
+                                                    Quantity
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {order.Products.map(item =>
 
-                                        <table className="table table-striped" >
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        Name
-                                                    </th>
-                                                    <th>
-                                                        Price
-                                                    </th>
-                                                    <th>
-                                                        Quantity
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
+                                                <tr key={item.ProductId}>
                                                     <td>
                                                         {item.Product.ProductName}
                                                     </td>
@@ -118,10 +118,10 @@ const AdminOrdersTable = () => {
                                                         {item.Quantity}
                                                     </td>
                                                 </tr>
-                                            </tbody>
-                                        </table>)
 
-                                    }
+                                            )}
+                                        </tbody>
+                                    </table>
                                 </Accordion.Body>
                             </Accordion.Item>
                         </Accordion>
