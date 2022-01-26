@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Label } from "reactstrap";
+import { Label, Col } from "reactstrap";
 
 export const ReadProductImages = () => {
     var xmlHttp = new XMLHttpRequest();
@@ -21,12 +21,13 @@ export const ProductImageFormComponent = ({ product, setProduct }) => {
     }, []);
 
     return (
+
         <div>
             <Label for="Image">Image</Label>
             <div className="row">
                 <div className="col-lg-10">
                     <select className="form-control"
-                        value={product.ProductImageUrl}
+                        defaultValue={productImages[0]}
                         onChange={(e) => setProduct({ ...product, ProductImageUrl: e.target.value })}
                         name="Image" type="image">
                         {selectProductImageList}
