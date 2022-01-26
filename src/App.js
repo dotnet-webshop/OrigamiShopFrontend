@@ -26,17 +26,17 @@ const App = (props) => {
     const {updateLoginState} = bindActionCreators(userActions,dispatch)
     useEffect(() => {
         updateLoginState()
-    },[])
+    },[props.match])
         return (
             <Layout>
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <ProtectedRoute exact path='/customer-profile' adminRoute={false} component={CustomerProfile} />
                     <Route exact path='/about' component={About} />
-                    <Route exact path='/cart' component={Cart}/>
                     <Route exact path='/login' component={LoginPage}/>
                     <Route exact path='/register' component={Register}/>
                     <Route exact path='/product/:productId' component={ProductDetails} />
+                    <ProtectedRoute exact path='/cart' adminRoute={false} component={Cart}/>
                     <ProtectedRoute exact path='/orders/:orderId' adminRoute={true} component={OrderDetailsPage} />
                     <AdminRoutes/>
                     <Route exact path='/cart/receipt/' component={Reciept} />

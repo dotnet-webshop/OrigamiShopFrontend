@@ -10,7 +10,9 @@
 *   }
 * ]
 */
-const cartReducer = (cart = {items: [], totalPrice: 0, itemCount: 0}, action) => {
+
+const initalState =  {items: [], totalPrice: 0, itemCount: 0}
+const cartReducer = (cart = initalState, action) => {
     const getItemIndexFromProductId = (productId) => {
         return cart.items.findIndex((item) => item.product.Id === productId);
     }
@@ -71,8 +73,8 @@ const cartReducer = (cart = {items: [], totalPrice: 0, itemCount: 0}, action) =>
                 return {...cart, items: [...items], itemCount: count, totalPrice: calculateTotalPrice(items)}
             }
             return cart
-        case "checkout":
-            return cart
+        case "clearCart":
+            return initalState
         default:
             return cart
     }

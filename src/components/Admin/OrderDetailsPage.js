@@ -148,7 +148,7 @@ const OrderDetailsPage = ({ match }) => {
                     </p>
                     <p className="col">
                         <b> Order Date: </b>
-                        <Input type="date" defaultValue={order.OrderDate.substring(0,10)}
+                        <Input type="date" value={order?.OrderDate.substring(0,10)}
                         onChange={(e)=> setOrder({...order,OrderDate:e.target.valueAsDate.toISOString()})}></Input>
                     </p>
                 </div>
