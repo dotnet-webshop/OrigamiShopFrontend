@@ -246,7 +246,7 @@ const OrderDetailsPage = ({ match }) => {
                             <td>
                                 <Input type="number"
                                     min={1} max={item?.Product?.Stock}
-                                    defaultValue={item.Quantity ? item.Quantity > 0 && item.Quantity !== undefined : 1}
+                                    defaultValue={item.Quantity ?? 1}
                                     onChange={(e) => setItemQuantity(index, e.target.valueAsNumber)} />
                             </td>
                             <td>
