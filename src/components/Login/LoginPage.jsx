@@ -38,19 +38,19 @@ function LoginPage(){
             }
         )
     }
-    
+
     const loginForm  = () => (
         <div className="">
             <h2>Login</h2>
             <div>
                 <Form  noValidate validated={validated} >
-                    
+
                     <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label>Email</Form.Label>
                         <Form.Control
                             type="email"
                             aria-describedby="inputGroupPrepend"
-                            value={email} name="email" onChange={(e)=>setEmail(e.target.value)}  
+                            value={email} name="email" onChange={(e)=>setEmail(e.target.value)}
                             required
                             />
                             <Form.Control.Feedback type="invalid">
@@ -58,14 +58,14 @@ function LoginPage(){
                             </Form.Control.Feedback>
                     </Form.Group>
                     <br />
-                    
+
                     <Form.Group as={Col} md="6" controlId="validationCustom06">
                         <Form.Label>Password</Form.Label>
                         <Form.Control
-                            type="password"   
-                            required  
-                            value={password} 
-                            name="password" 
+                            type="password"
+                            required
+                            value={password}
+                            name="password"
                             onChange={(e)=>setPassword(e.target.value)} />
                         <Form.Control.Feedback type="invalid">
                             Please provide a valid Password.
@@ -85,16 +85,25 @@ function LoginPage(){
                 <small><Link to="/register">Register account</Link></small>
                 <h5 className="text-danger">{errorMessage}</h5>
             </div>
-            <Button className="btn btn-primary mt-2" onClick={(e) => onHandleLogin(e)} >Login</Button> */}
-            <div>
-                <small className="mr-2">Admin email: admin@admin.com</small>
-                <small>Admin pw: virge3d</small>
+            <Button className="btn btn-primary mt-2" onClick={(e) => onHandleLogin(e)} >Login</Button>
+            <div className="mt-5">
+                <div className="row">
+                    <small className="col"><b> Admin email</b> admin@admin.com</small>
+                </div>
+                <div className="row">
+                    <small className="col"> <b> Admin password</b> virge3d</small>
+                </div>
+                <div className="row mt-2">
+                    <small className="col"><b> User email</b> user@user.com</small>
+                </div>
+                <div className="row">
+                    <small className="col"> <b> User password</b> virge3d</small>
+                </div>
             </div>
-
         </div>
     )
     return (
         (!user.isLoggedIn) ? loginForm() : <Redirect to='/'/>
-    )    
+    )
 }
 export default LoginPage;

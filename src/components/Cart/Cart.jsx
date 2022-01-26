@@ -3,7 +3,11 @@ import React, { useState, useEffect } from "react";
 import {bindActionCreators} from "redux";
 import {cartActions} from "../../state/actions/index"
 import { Button, Input } from "reactstrap";
-import { endpoints, create, getOne } from "../../services/api";
+import { endpoints, create, getOne, createReturnsResponse } from "../../services/api";
+import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
+
 
 function Cart(props) {
     const cart = useSelector((state) => state.cart)
@@ -11,6 +15,7 @@ function Cart(props) {
     const CustomerId = useSelector((state) => state.user.Id)
     const dispatch = useDispatch()
     const { setCartItemQuantity, removeCartItemFromCart } = bindActionCreators(cartActions, dispatch)
+    const history = useHistory();
  
     const initialState = {
         CustomerId: '',
@@ -51,9 +56,19 @@ function Cart(props) {
         order.CustomerId = CustomerId
         order.Products = Products
         console.log(order)
-        create(endpoints.orders, order)
-            .then(response => console.log(response))
+        createReturnsResponse(endpoints.orders, order)
+            .then(response => { 
+                console.log(response)
+                if (response.status >= 200 && response.status < 300) {
+                    history.push({
+                        pathname: "/cart/receipt/",
+                        state: {receipt: response.data }
+                    })
+                }
+            })
+        
     }
+    
 
     return (
         <section className={"shopping-cart"}>
@@ -62,7 +77,7 @@ function Cart(props) {
                 <div className="mb-3">
                 
                 {cartItems.map((cartItem, index) =>
-                    <div   key={"cart-item-" + index}>
+                    <div key={"cart-item-" + index}>
                         <div className={"d-flex "}>
                             <p className="mr-3">{cartItem.product.ProductName}</p>
                             <Input style={{ width: "10rem" }}
@@ -80,18 +95,26 @@ function Cart(props) {
                         </div>
                     </div>)
                 }
+                
+                {
+                cartItems.length > 0 ?
                     <div>
-                        Shipping Address
-                        <Input value={order.ShippingAddress} name="shippingAddress" 
-                            type="text" 
-                            onChange={(e)=>setOrder({...order,ShippingAddress:e.target.value})}/>
+                        <div>
+                            Billing Address
+                            <Input value={order.ShippingAddress} name="shippingAddress" 
+                                type="text" 
+                                onChange={(e)=>setOrder({...order,ShippingAddress:e.target.value})}/>
+                        </div>
+                        <div>
+                            Email
+                            <Input value={order.OrderEmail} name="orderEmail" 
+                                type="text" 
+                                onChange={(e)=>setOrder({...order,OrderEmail:e.target.value})}/>
+                        </div>
                     </div>
-                    <div>
-                        Email
-                        <Input value={order.OrderEmail} name="orderEmail" 
-                            type="text" 
-                            onChange={(e)=>setOrder({...order,OrderEmail:e.target.value})}/>
-                    </div>
+
+                    : null
+                }
                 </div>
                 
                 

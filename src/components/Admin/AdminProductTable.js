@@ -46,14 +46,21 @@ const AdminProductTable = () => {
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
+                    <th>Image</th>
                     <th>Price</th>
                     <th>Stock</th>
                 </tr>
                 </thead>
                 <tbody>
-                {products.map(product => <tr key={product.Id}>
+                {products.map(product => 
+                <tr key={product.Id}>
                     <td>{product.Id}</td>
-                    <td><Link to={"/product/"+product.Id}>{product.ProductName}</Link></td>
+                    <td>
+                        <Link className="" to={"/product/"+product.Id}>{product.ProductName}</Link>
+                    </td>
+                    <td className="">
+                        <img className="img-thumbnail" style={{maxWidth:"100px"}} src={product.ProductImageUrl} alt={product.ProductName}/>
+                    </td>
                     <td>${product.ProductPrice}</td>
                     <td>{product.Stock}</td>
                     <td><Button outline color="danger" onClick={()=>onHandleDelete(product.Id)}>Delete</Button></td>
