@@ -77,7 +77,7 @@ function LoginPage(){
                     <Button className="btn btn-primary mt-2" onClick={(e) => onHandleLogin(e)} >Login</Button>
                 </Form>
             </div>
-            {/* <div>
+             {/* <div>
                 <Label for="email">Email</Label>
                 <Input value={email} name="email" onChange={(e)=>setEmail(e.target.value)} type={"email"}/>
                 <Label for="password">Password</Label>
@@ -99,7 +99,7 @@ function LoginPage(){
                 <div className="row">
                     <small className="col"> <b> User password</b> virge3d</small>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
     return (

@@ -9,27 +9,29 @@ const CreateProductForm = ({onCreate}) => {
         ProductPrice:1,
         ProductImageUrl:"",
         ProductDescription:"",
-        DateCreated:Date.now().toString()
+        DateCreated:Date.now().toString(),
+        Stock: 0
     }
-    const initialStockState = { Stock: 0 }
+    // const initialStockState = { Stock: 0 }
 
     const [newProduct,setNewProduct] = useState(initialProductState)
-    const [newStock,setNewStock] = useState(initialStockState)
+    // const [newStock,setNewStock] = useState(initialStockState)
     const [validated, setValidated] = useState(false);
+    
     const onHandleSubmit = (e) => {
         const form = e.currentTarget;
-        let { Stock, min, max } = e.target;
-        Stock = Math.max(Number(min), Math.min(Number(max), Number(Stock)));
+        let {  min, max } = e.target;
+        newProduct.Stock = e.target;
+        newProduct.Stock  = Math.max(Number(min), Math.min(Number(max), Number(newProduct.Stock )));
         
         if (form.checkValidity() === false) {
             e.preventDefault();
             e.stopPropagation();
         }
         setValidated(true);
-        if (onCreate)
+        if (onCreate )
         {
-            onCreate(newProduct, newStock)
-            setNewStock({ Stock });
+            onCreate(newProduct)
             setNewProduct({...initialProductState});
         }
         else {
@@ -86,7 +88,7 @@ const CreateProductForm = ({onCreate}) => {
                     name="Stock" type="number" min="1"
                     max="250"
                     value={newProduct.Stock}
-                    onChange={ (e) => setNewStock({...newStock,Stock:e.target.value}) }/>
+                    onChange={ (e) => setNewProduct({...newProduct,Stock:e.target.value}) }/>
                 <Form.Control.Feedback type="invalid">
                     Please provide a valid Stock number.
                 </Form.Control.Feedback>

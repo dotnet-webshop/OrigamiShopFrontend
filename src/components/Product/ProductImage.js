@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Label } from "reactstrap";
+import { Label, Col } from "reactstrap";
 
 export const ReadProductImages = () => {
     var xmlHttp = new XMLHttpRequest();
@@ -21,6 +21,7 @@ export const ProductImageFormComponent = ({ product, setProduct }) => {
     }, []);
 
     return (
+
         <div>
             <Label for="Image">Image</Label>
             <div className="row">
