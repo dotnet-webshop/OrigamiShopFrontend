@@ -25,6 +25,7 @@ function LoginPage(){
         if (form.checkValidity() === false) {
         e.preventDefault();
         e.stopPropagation();
+        return
         }
         setValidated(true);
         login(pw,mail).then(

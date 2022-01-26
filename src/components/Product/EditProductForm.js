@@ -20,6 +20,7 @@ const EditProductForm = ({product, onSubmit}) => {
         if (form.checkValidity() === false) {
             e.preventDefault();
             e.stopPropagation();
+            return
         }
         setValidated(true);
         if (onSubmit)
@@ -33,7 +34,7 @@ const EditProductForm = ({product, onSubmit}) => {
     }
 
     return (
-        <Form noValidate validated={validated}>
+        <Form noValidate validated={validated} onSubmit={onHandleSubmit}>
             {/* <div>
                 <Label for="Name">Product Name</Label>
                 <Input required name="Name" type="text"
@@ -115,7 +116,8 @@ const EditProductForm = ({product, onSubmit}) => {
                 </Form.Control.Feedback>
             </Form.Group>
             <br />
-            <Button onClick={(e) => onHandleSubmit(e)}>Edit</Button>
+            <Button type="submit">Edit</Button>
+            {/* <Button onClick={(e) => onHandleSubmit(e)}>Edit</Button> */}
         </Form>
     )
 }

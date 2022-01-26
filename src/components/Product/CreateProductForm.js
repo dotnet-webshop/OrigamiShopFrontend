@@ -19,14 +19,16 @@ const CreateProductForm = ({onCreate}) => {
     const [validated, setValidated] = useState(false);
     
     const onHandleSubmit = (e) => {
+       
         const form = e.currentTarget;
         let {  min, max } = e.target;
         newProduct.Stock = e.target;
         newProduct.Stock  = Math.max(Number(min), Math.min(Number(max), Number(newProduct.Stock )));
-        
+        console.log(form.checkValidity())
         if (form.checkValidity() === false) {
             e.preventDefault();
             e.stopPropagation();
+            return
         }
         setValidated(true);
         if (onCreate )
@@ -40,7 +42,7 @@ const CreateProductForm = ({onCreate}) => {
     }
 
     return (
-        <Form  noValidate validated={validated} >
+        <Form  noValidate validated={validated} onSubmit={onHandleSubmit}>
            <Form.Group as={Col} md="4" controlId="validationCustom01">
                 <Form.Label>Product Name</Form.Label>
                 <Form.Control
@@ -94,7 +96,8 @@ const CreateProductForm = ({onCreate}) => {
                 </Form.Control.Feedback>
             </Form.Group>
             <br />
-            <Button onClick={(e) => onHandleSubmit(e)}>Create</Button>
+            <Button type="submit">Create</Button>
+            {/* <Button onClick={(e) => onHandleSubmit(e)}>Create</Button> */}
         </Form>
 
         // <form>
