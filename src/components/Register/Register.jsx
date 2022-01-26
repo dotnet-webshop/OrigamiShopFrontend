@@ -21,12 +21,17 @@ function Register(){
 
     function  onHandleRegister (e){
         newUser.Username = newUser.Email
-        const form = e.currentTarget;
-        if (form.checkValidity() === false) {
+        setValidated(true);
         e.preventDefault();
         e.stopPropagation();
+        const form = e.currentTarget;
+        console.log(form.checkValidity())
+        if (form.checkValidity() === false) {
+            e.preventDefault();
+            e.stopPropagation(); 
+            setValidated(true);
+            return
         }
-        setValidated(true);
         console.log(newUser)
         register({
             Username:newUser.Username,
@@ -36,6 +41,7 @@ function Register(){
             if(res.data.success === true)
             {
                 console.log("success register")
+                setValidated(false);
             }
             else {
                 console.log("failed to register")
@@ -52,7 +58,7 @@ function Register(){
         <div className="">
             <h2>Register User</h2>
             <div>
-                <Form  noValidate validated={validated} >
+                <Form  noValidate validated={validated} onSubmit={onHandleRegister}>
                     {/* <Label for="fullName">Full Name</Label> */}
                     {/* <Input value={newUser.FullName} name="fullName" 
                         type="text" 
@@ -183,12 +189,15 @@ function Register(){
                         feedbackType="invalid"
                         />
                     </Form.Group>
-                    
                     <Button disabled={confirmPassword !== newUser.Password || newUser.Password === ""} 
+                        className="btn btn-primary mt-2" type="submit">
+                    Register
+                    </Button>
+                    {/* <Button disabled={confirmPassword !== newUser.Password || newUser.Password === ""} 
                         className="btn btn-primary mt-2" 
                         onClick={(e) => onHandleRegister(e)}>
                     Register
-                    </Button>
+                    </Button> */}
                 </Form>
             </div>
             <br />

@@ -12,14 +12,15 @@ const EditProductForm = ({product, onSubmit}) => {
     }, [product])
     
     const onHandleSubmit = (e) => {
+        setValidated(true);
+        e.preventDefault();
+        e.stopPropagation();
         const form = e.currentTarget;
-        let {  min, max } = e.target;
-        newProduct.Stock = e.target;
-        newProduct.Stock  = Math.max(Number(min), Math.min(Number(max), Number(newProduct.Stock )));
-        
+        console.log(form.checkValidity())
         if (form.checkValidity() === false) {
             e.preventDefault();
-            e.stopPropagation();
+            e.stopPropagation(); 
+            setValidated(true);
             return
         }
         setValidated(true);
@@ -27,6 +28,7 @@ const EditProductForm = ({product, onSubmit}) => {
         {
             onSubmit(newProduct)
             setNewProduct({...product});
+            setValidated(false);
         }
         else {
             console.error("onSubmit prop not set.")
@@ -108,15 +110,14 @@ const EditProductForm = ({product, onSubmit}) => {
                 <Form.Control 
                     required  
                     name="Stock" type="number" min="1"
-                    max="250"
                     value={newProduct.Stock}
-                    onChange={ (e) => setNewProduct({...newProduct,Stock:e.target.value}) }/>
+                    onChange={ (e) => setNewProduct({...newProduct,Stock:e.target.valueAsNumber}) }/>
                 <Form.Control.Feedback type="invalid">
                     Please provide a valid Stock number.
                 </Form.Control.Feedback>
             </Form.Group>
             <br />
-            <Button type="submit">Edit</Button>
+            <Button color='primary' outline className='my-2' type="submit">Edit</Button>
             {/* <Button onClick={(e) => onHandleSubmit(e)}>Edit</Button> */}
         </Form>
     )

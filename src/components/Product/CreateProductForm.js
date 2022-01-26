@@ -26,7 +26,7 @@ const CreateProductForm = ({onCreate}) => {
         console.log(form.checkValidity())
         if (form.checkValidity() === false) {
             e.preventDefault();
-            e.stopPropagation();
+            e.stopPropagation(); 
             setValidated(true);
             return
         }

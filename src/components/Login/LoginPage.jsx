@@ -21,18 +21,23 @@ function LoginPage(){
         let mail = email
         setPassword("")
         setEmail("")
-        const form = e.currentTarget;
-        if (form.checkValidity() === false) {
+        setValidated(true);
         e.preventDefault();
         e.stopPropagation();
-        return
+        const form = e.currentTarget;
+        console.log(form.checkValidity())
+        if (form.checkValidity() === false) {
+            e.preventDefault();
+            e.stopPropagation(); 
+            setValidated(true);
+            return
         }
-        setValidated(true);
         login(pw,mail).then(
             res => {
                 if (res !== undefined) {
                     console.log(res.Token)
                     onLogin(res.Token)
+                    setValidated(false);
                 } else {
                     setErrorMessage('Error logging in!')
                 }
@@ -44,7 +49,7 @@ function LoginPage(){
         <div className="">
             <h2>Login</h2>
             <div>
-                <Form  noValidate validated={validated} >
+                <Form  noValidate validated={validated} onSubmit={onHandleLogin}>
 
                     <Form.Group as={Col} md="4" controlId="validationCustom02">
                         <Form.Label>Email</Form.Label>
@@ -75,7 +80,8 @@ function LoginPage(){
                     <br />
                     <small><Link to="/register">Register account</Link></small>
                     <h5 className="text-danger">{errorMessage}</h5>
-                    <Button className="btn btn-primary mt-2" onClick={(e) => onHandleLogin(e)} >Login</Button>
+                    <Button className="btn btn-primary mt-2"  type="submit">Login</Button>
+                    {/* <Button className="btn btn-primary mt-2" onClick={(e) => onHandleLogin(e)} >Login</Button> */}
                 </Form>
             </div>
              {/* <div>
