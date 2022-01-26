@@ -68,15 +68,22 @@ const OrderDetailsPage = ({ match }) => {
     }
 
     const onHandleSelectItem = (id, index) => {
-        console.log({ "id": id, "index": index })
         const product = products.find(p => p.Id === parseInt(id))
         if (product !== undefined) {
             let newProducts = [...order.Products]
-            newProducts[index] = { ...newProducts[index], Product: product, ProductId: product.Id }
+            newProducts[index] = { ...newProducts[index], Product: {...product}, ProductId: product.Id , Quantity: product.Quantity }
             setOrder({ ...order, Products: newProducts })
         }
-
     }
+
+    const productOptions = () => {
+        return products.map((p,i) =>
+                <option value={p.Id} key={p.Id + " " + i} >
+                    {p.ProductName}
+                </option>
+            )
+    }
+    
     const removeOrderItem = (index) => {
         if (index > -1)
         {
@@ -224,15 +231,10 @@ const OrderDetailsPage = ({ match }) => {
                         </td>
                     </tr>
                     {order.Products.map((item, index) =>
-                        <tr key={item.ProductId + "" + index}>
+                        <tr key={item.ProductId + "-" + index}>
                             <td>
-                                <Input type="select" onChange={(e) => onHandleSelectItem(e.target.value, index)}>
-                                    {products.map(p =>
-                                        <option value={p.Id} key={p.Id} >
-                                            {p.ProductName}
-                                        </option>
-                                    )
-                                    }
+                                <Input value={item.ProductId} type="select" onChange={(e) => onHandleSelectItem(e.target.value, index)}>
+                                    {productOptions()}
                                 </Input>
                             </td>
                             <td>
@@ -244,7 +246,7 @@ const OrderDetailsPage = ({ match }) => {
                             <td>
                                 <Input type="number"
                                     min={1} max={item?.Product?.Stock}
-                                    value={item.Quantity}
+                                    defaultValue={item.Quantity ? item.Quantity > 0 && item.Quantity !== undefined : 1}
                                     onChange={(e) => setItemQuantity(index, e.target.valueAsNumber)} />
                             </td>
                             <td>
