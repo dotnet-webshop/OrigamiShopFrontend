@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { deleteById, endpoints, getAll } from "../../services/api";
 import { Accordion } from 'react-bootstrap';
-
+import {Button} from 'reactstrap';
 const AdminOrdersTable = () => {
     const [orders, setOrders] = useState([])
     useEffect(() => {
@@ -77,7 +77,11 @@ const AdminOrdersTable = () => {
                                     </p>
                                 </Accordion.Header>
                                 <Accordion.Body>
-                                    <Link to={`/orders/${order.Id}`}>Edit Order</Link>
+                                    <Link to={`/orders/${order.Id}`}>
+                                        <Button outline color="primary" className="my-2">
+                                            Edit Order
+                                        </Button>
+                                    </Link>
                                     <p>
                                         <b>Total Price </b>
                                         ${order.TotalPrice}
