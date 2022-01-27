@@ -8,19 +8,20 @@ import {useDispatch, useSelector} from "react-redux";
 import Form from 'react-bootstrap/Form'
 
 function LoginPage(){
-    const [password,setPassword] = useState("")
-    const [email,setEmail] = useState("")
+    const [loginCredentials,setLoginCredentials] = useState({
+        Password:"",
+        Email:""
+
+    })
+
     const [errorMessage, setErrorMessage] = useState("")
-    const [Username,SetUserName] = useState("")
     const user = useSelector(state => state.user)
     const dispatch = useDispatch()
     const {onLogin} = bindActionCreators(userActions,dispatch)
     const [validated, setValidated] = useState(false);
     function  onHandleLogin (e){
-        let pw = password
-        let mail = email
-        setPassword("")
-        setEmail("")
+
+  
         setValidated(true);
         e.preventDefault();
         e.stopPropagation();
@@ -32,6 +33,13 @@ function LoginPage(){
             setValidated(true);
             return
         }
+
+        let pw = loginCredentials.Password
+        let mail = loginCredentials.Email
+        setLoginCredentials({
+            Password:"",
+            Email:"",
+        }); 
         login(pw,mail).then(
             res => {
                 if (res !== undefined) {
@@ -56,7 +64,8 @@ function LoginPage(){
                         <Form.Control
                             type="email"
                             aria-describedby="inputGroupPrepend"
-                            value={email} name="email" onChange={(e)=>setEmail(e.target.value)}
+                            value={loginCredentials.Email} name="email" 
+                            onChange={(e)=>setLoginCredentials({...loginCredentials, Email: e.target.value})}
                             required
                             />
                             <Form.Control.Feedback type="invalid">
@@ -70,9 +79,9 @@ function LoginPage(){
                         <Form.Control
                             type="password"
                             required
-                            value={password}
+                            value={loginCredentials.Password}
                             name="password"
-                            onChange={(e)=>setPassword(e.target.value)} />
+                            onChange={(e)=>setLoginCredentials({...loginCredentials, Password: e.target.value})} />
                         <Form.Control.Feedback type="invalid">
                             Please provide a valid Password.
                         </Form.Control.Feedback>
@@ -81,18 +90,8 @@ function LoginPage(){
                     <small><Link to="/register">Register account</Link></small>
                     <h5 className="text-danger">{errorMessage}</h5>
                     <Button className="btn btn-primary mt-2"  type="submit">Login</Button>
-                    {/* <Button className="btn btn-primary mt-2" onClick={(e) => onHandleLogin(e)} >Login</Button> */}
                 </Form>
             </div>
-             {/* <div>
-                <Label for="email">Email</Label>
-                <Input value={email} name="email" onChange={(e)=>setEmail(e.target.value)} type={"email"}/>
-                <Label for="password">Password</Label>
-                <Input value={password} name="password" type="password" onChange={(e)=>setPassword(e.target.value)}/>
-                <small><Link to="/register">Register account</Link></small>
-                <h5 className="text-danger">{errorMessage}</h5>
-            </div>
-            <Button className="btn btn-primary mt-2" onClick={(e) => onHandleLogin(e)} >Login</Button>
             <div className="mt-5">
                 <div className="row">
                     <small className="col"><b> Admin email</b> admin@admin.com</small>
@@ -106,7 +105,7 @@ function LoginPage(){
                 <div className="row">
                     <small className="col"> <b> User password</b> virge3d</small>
                 </div>
-            </div> */}
+            </div>
         </div>
     )
     return (

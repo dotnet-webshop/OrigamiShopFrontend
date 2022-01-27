@@ -14,7 +14,7 @@ function Cart(props) {
     const cartItems = useSelector((state) => state.cart.items)
     const CustomerId = useSelector((state) => state.user.Id)
     const dispatch = useDispatch()
-    const { setCartItemQuantity, removeCartItemFromCart } = bindActionCreators(cartActions, dispatch)
+    const { setCartItemQuantity, removeCartItemFromCart , clearCart } = bindActionCreators(cartActions, dispatch)
     const history = useHistory();
  
     const initialState = {
@@ -60,6 +60,7 @@ function Cart(props) {
             .then(response => { 
                 console.log(response)
                 if (response.status >= 200 && response.status < 300) {
+                    clearCart()
                     history.push({
                         pathname: "/cart/receipt/",
                         state: {receipt: response.data }
