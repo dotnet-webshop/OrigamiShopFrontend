@@ -37,11 +37,11 @@ const AdminProductTable = () => {
         <div>
             <AdminNav currentRoute={"products"}/>
             <div>
-                <h2 >&emsp;Admin Panel -<small className="text-muted">Create Product </small></h2> 
+                <h2 >&emsp;Admin Panel -<small className="font-monospace text-muted">Products </small></h2> 
                 <CreateProductForm onCreate={onHandleCreateProduct}/>
             </div>
             <br />
-            <h2 ><small className="text-muted">Products List </small></h2> 
+            <h2 ><small className="font-monospace text-muted">Products List </small></h2> 
             <table className="table  table-striped">
                 <thead>
                 <tr>

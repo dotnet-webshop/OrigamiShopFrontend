@@ -34,15 +34,17 @@ const ProductDetails = ({ match}) => {
     }
     const view = user.isLoggedIn && user.Role === "Admin" ? <EditProductForm product={product} onSubmit={onHandleEditSubmit}/> : null
     return (
-        <div id="product-details">
+        <div  id="product-details">
             {view}
-            <div>
-                <h3>{product.ProductName}</h3>
-                <img src={product.ProductImageUrl} alt={product.ProductName}/>
+            <br />
+            <div className = "bg-success p-2 text-dark bg-opacity-10">
+                <div >
+                    <h3>{product.ProductName}</h3>
+                    <img src={product.ProductImageUrl} alt={product.ProductName}/>
+                </div>
+                <p>${product.ProductPrice}</p>
+                <p>{product.ProductDescription}</p>
             </div>
-            <p>${product.ProductPrice}</p>
-            <p>{product.ProductDescription}</p>
-
         </div>
     )
 }
