@@ -17,8 +17,8 @@ function ProductList(props) {
     }, [])
     
     return (
-        <div>
-            <h4>Products</h4>
+        <div className="bg-success p-2 text-dark bg-opacity-10">
+            <h4 className = " font-monospace text-center" >Products</h4>
             <section className="d-flex flex-wrap">
                 {products.map((product) => 
                  <Product key={product.Id} product={product}>
