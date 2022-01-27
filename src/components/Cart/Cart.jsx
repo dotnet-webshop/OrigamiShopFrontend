@@ -1,7 +1,7 @@
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
-import {bindActionCreators} from "redux";
-import {cartActions} from "../../state/actions/index"
+import { bindActionCreators } from "redux";
+import { cartActions } from "../../state/actions/index"
 import { Button, Input } from "reactstrap";
 import { endpoints, create, getOne, createReturnsResponse } from "../../services/api";
 import { withRouter } from "react-router-dom";
@@ -14,9 +14,9 @@ function Cart(props) {
     const cartItems = useSelector((state) => state.cart.items)
     const CustomerId = useSelector((state) => state.user.Id)
     const dispatch = useDispatch()
-    const { setCartItemQuantity, removeCartItemFromCart , clearCart } = bindActionCreators(cartActions, dispatch)
+    const { setCartItemQuantity, removeCartItemFromCart, clearCart } = bindActionCreators(cartActions, dispatch)
     const history = useHistory();
- 
+
     const initialState = {
         CustomerId: '',
         Products: [],
@@ -29,7 +29,7 @@ function Cart(props) {
         this.Quantity = quantity;
     }
 
-    const [order ,setOrder] = useState(initialState)
+    const [order, setOrder] = useState(initialState)
 
 
     const onQuantityChanged = (event, productId) => {
@@ -41,7 +41,9 @@ function Cart(props) {
         setCartItemQuantity(productId, quantity)
     }
 
-    
+    const isCartEmpty = () => {
+        return cartItems.length <= 0
+    }
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -57,80 +59,84 @@ function Cart(props) {
         order.Products = Products
         console.log(order)
         createReturnsResponse(endpoints.orders, order)
-            .then(response => { 
+            .then(response => {
                 console.log(response)
                 if (response.status >= 200 && response.status < 300) {
                     clearCart()
                     history.push({
                         pathname: "/cart/receipt/",
-                        state: {receipt: response.data }
+                        state: { order: response.data }
                     })
                 }
             })
-        
+
     }
-    
+
 
     return (
         <section className={"shopping-cart"}>
             <h2 className="mb-5">Cart</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                
-                {cartItems.map((cartItem, index) =>
-                    <div key={"cart-item-" + index}>
-                        <div className={"d-flex "}>
-                            <p className="mr-3">{cartItem.product.ProductName}</p>
-                            <Input style={{ width: "10rem" }}
-                                   onChange={(e) => onQuantityChanged(e, cartItem.product.Id)}
-                                   type={"number"}
-                                   defaultValue={cartItem.quantity}
-                                   min={1}
-                                   max={cartItem.product.Stock}
-                            />
 
-                            <Button
-                                className={"bg-transparent btn btn-outline-danger"}
-                                onClick={() => removeCartItemFromCart(cartItem.product.Id)}
-                            >X</Button>
-                        </div>
-                    </div>)
-                }
-                
-                {
-                cartItems.length > 0 ?
-                    <div>
-                        <div>
-                            Billing Address
-                            <Input value={order.ShippingAddress} name="shippingAddress" 
-                                type="text" 
-                                onChange={(e)=>setOrder({...order,ShippingAddress:e.target.value})}/>
-                        </div>
-                        <div>
-                            Email
-                            <Input value={order.OrderEmail} name="orderEmail" 
-                                type="text" 
-                                onChange={(e)=>setOrder({...order,OrderEmail:e.target.value})}/>
-                        </div>
-                    </div>
+                    {cartItems.map((cartItem, index) =>
+                        <div key={"cart-item-" + index}>
+                            <div className={"d-flex "}>
+                                <p className="mr-3">{cartItem.product.ProductName}</p>
+                                <Input style={{ width: "10rem" }}
+                                    onChange={(e) => onQuantityChanged(e, cartItem.product.Id)}
+                                    type={"number"}
+                                    defaultValue={cartItem.quantity}
+                                    min={1}
+                                    max={cartItem.product.Stock}
+                                />
 
-                    : null
-                }
-                </div>
-                
-                
-                <div className="mb-5">
-                {
-                    cartItems.length <= 0 ? (<div> <h3>Your Cart is empty</h3> </div>)
-                     :
-                        (<div >
-                            <span>
-                                Total: {cart.totalPrice}$
-                            </span>
+                                <Button
+                                    className={"bg-transparent btn btn-outline-danger"}
+                                    onClick={() => removeCartItemFromCart(cartItem.product.Id)}
+                                >X</Button>
+                            </div>
                         </div>)
-                }
-            </div>
-                <input type="submit" value="Checkout" className="btn btn-primary" />
+                    }
+
+
+
+
+
+
+
+                </div>
+
+
+                <div className="mb-5">
+                    {
+                        isCartEmpty() ? (<div> <h3>Your Cart is empty</h3> </div>)
+                            :
+                            (<div >
+                                <span>
+                                    Total: {cart.totalPrice}$
+                                </span>
+
+                                <div>
+                                    <div>
+                                        Billing Address
+                                        <Input value={order.ShippingAddress} name="shippingAddress"
+                                            type="text"
+                                            onChange={(e) => setOrder({ ...order, ShippingAddress: e.target.value })} />
+                                    </div>
+                                    <div>
+                                        Email
+                                        <Input value={order.OrderEmail} name="orderEmail"
+                                            type="text"
+                                            onChange={(e) => setOrder({ ...order, OrderEmail: e.target.value })} />
+                                    </div>
+                                </div>
+                                <input type="submit" value="Checkout" className="btn btn-primary" />
+
+                            </div>)
+
+                    }
+                </div>
             </form>
         </section>
     )

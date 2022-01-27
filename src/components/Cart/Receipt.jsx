@@ -1,22 +1,18 @@
-function Reciept(props) {
-    const data = props.location.state.receipt
-    let products = data.Products
-
-    console.log(data)
-
+const Reciept = ({location}) => {
+    const order = location.state.order
     return(
         <div>
             <h1 className="mb-5">Reciept</h1>
-            <b className="mb-3">Order nr </b> <p>{ data.Id }</p>
-            <b className="mb-3">Email </b> <p>{ data.OrderEmail }</p>
-            <b className="mb-3">Shipping Address </b><p> { data.ShippingAddress }</p>
-            <b className="mb-5">Total cost </b><p>{data.TotalPrice}$</p>
+            <b className="mb-3">#Order nr </b> <p>{ order.Id }</p>
+            <b className="mb-3">Email </b> <p>{ order.OrderEmail }</p>
+            <b className="mb-3">Shipping Address </b><p> { order.ShippingAddress }</p>
+            <b className="mb-5">Total cost </b><p>{order.TotalPrice}$</p>
 
 
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Product number</th>
+                        <th scope="col">Product Id</th>
                         <th scope="col">Product</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Price</th>
@@ -24,16 +20,22 @@ function Reciept(props) {
                 </thead>
                 <tbody>
                     {
-                        data.Products.map(order => {
-                            console.log(order);
+                        order.Products.map(item => {
                             return<tr>
-                                    <td>{ order.Product.Id }</td>
-                                    <td>{ order.Product.ProductName }</td>
-                                    <td>{ order.Quantity }</td>
-                                    <td>{order.Quantity * order.Product.ProductPrice }$</td>
+                                    <td>{item.Product.Id }</td>
+                                    <td>{ item.Product.ProductName }</td>
+                                    <td>{ item.Quantity }</td>
+                                    <td>{item.Quantity * item.Product.ProductPrice }$</td>
                                 </tr>
                         })
                     }
+                    <tr><td colSpan={3}>
+                            <b>Total Price</b>
+                        </td>
+                        <td>
+                            <b>{order.TotalPrice}$</b>
+                        </td>
+                        </tr>
                 </tbody>
             </table>
         </div>
