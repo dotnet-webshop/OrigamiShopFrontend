@@ -14,15 +14,16 @@ function Register(){
         BillingAddress:"",
         ZipCode:"",
         Country:"",
-        Username:"",
+        UserName:"",
     }
+    
     const [newUser,setNewUser] = useState(initialState)
     const [validated, setValidated] = useState(false);
     const history = useHistory();
     
 
     function  onHandleRegister (e){
-        newUser.Username = newUser.Email
+        newUser.UserName = newUser.Email
         setValidated(true);
         e.preventDefault();
         e.stopPropagation();
@@ -36,7 +37,7 @@ function Register(){
         }
 
         register({
-            Username:newUser.Username,
+            Username:newUser.UserName,
             Password:newUser.Password,
             FullName:newUser.FullName,
             Email:newUser.Email,
