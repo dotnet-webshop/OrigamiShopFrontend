@@ -35,6 +35,8 @@ const ProductDetails = ({ match}) => {
     const view = user.isLoggedIn && user.Role === "Admin" ? <EditProductForm product={product} onSubmit={onHandleEditSubmit}/> : null
     return (
         <div  id="product-details">
+            <h2 >&emsp;Admin Panel -<small className="font-monospace text-muted"> Edit Product </small></h2>
+            <br />
             {view}
             <br />
             <div className = "bg-success p-2 text-dark bg-opacity-10">
