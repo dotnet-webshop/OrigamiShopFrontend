@@ -2,6 +2,8 @@ import {useDispatch} from "react-redux";
 import {bindActionCreators} from "redux";
 import {cartActions} from "../../state/actions/index"
 import {Link} from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 
 function Product(props){
     const dispatch = useDispatch()
@@ -23,10 +25,15 @@ function Product(props){
                 <p className="card-text">
                     {props.product.ProductDescription}
                 </p>
-               
-                <button onClick={ () => addProductToCart(props.product) } className="btn btn-outline-primary">Add to cart</button>
+               <div className = "d-grid gap-2 col-6 mx-auto">
+                    <button onClick={ () => addProductToCart(props.product) } 
+                        className="btn btn-outline-success btn-lg">
+                        <FontAwesomeIcon icon={faCartPlus} color=" #145A32"/>
+                   </button>
+               </div>
+                
             </div>
         </div>
     )
-}
+} 
 export default Product;

@@ -6,6 +6,9 @@ import './NavMenu.css';
 import CartIcon from "./Cart/CartIcon";
 import LoginMenu from "./Login/LoginMenu";
 import {useSelector} from "react-redux";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+
 
 
 export const NavMenu = (props) => {
@@ -16,7 +19,7 @@ export const NavMenu = (props) => {
   
     return (
       <header>
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
+        <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light  >
           <Container>
             <NavbarBrand tag={Link} to="/">OrigamI Shop</NavbarBrand>
             <NavbarToggler onClick={()=>setCollapsed(!collapsed)} className="mr-2" />
@@ -26,7 +29,8 @@ export const NavMenu = (props) => {
                   <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/cart"><span>Cart</span> <CartIcon/></NavLink>
+                  <NavLink tag={Link} className="fa " to="/cart"><CartIcon /> <FontAwesomeIcon icon={faShoppingCart} color=" #F5B041"/></NavLink>
+                  
                 </NavItem>
                 <NavItem hidden={!isLoggedIn || !isAdmin }>
                   <NavLink tag={Link} className="text-dark" to="/admin-panel/account">Admin Panel</NavLink>
