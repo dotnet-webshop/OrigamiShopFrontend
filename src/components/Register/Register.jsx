@@ -193,7 +193,7 @@ function Register(){
                                     />
                                 </Form.Group>
                                 <Button disabled={confirmPassword !== newUser.Password || newUser.Password === ""} 
-                                    className="btn btn-primary mt-2" type="submit">
+                                    className="btn btn-primary mt-2 col-3" type="submit">
                                 Register
                                 </Button>
                                 {/* <Button disabled={confirmPassword !== newUser.Password || newUser.Password === ""} 
