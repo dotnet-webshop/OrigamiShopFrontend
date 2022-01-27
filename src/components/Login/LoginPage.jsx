@@ -54,58 +54,74 @@ function LoginPage(){
     }
 
     const loginForm  = () => (
-        <div className="">
-            <h2>Login</h2>
-            <div>
-                <Form  noValidate validated={validated} onSubmit={onHandleLogin}>
-
-                    <Form.Group as={Col} md="4" controlId="validationCustom02">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control
-                            type="email"
-                            aria-describedby="inputGroupPrepend"
-                            value={loginCredentials.Email} name="email" 
-                            onChange={(e)=>setLoginCredentials({...loginCredentials, Email: e.target.value})}
-                            required
-                            />
-                            <Form.Control.Feedback type="invalid">
-                            Please provide a valid Email.
-                            </Form.Control.Feedback>
-                    </Form.Group>
-                    <br />
-
-                    <Form.Group as={Col} md="6" controlId="validationCustom06">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control
-                            type="password"
-                            required
-                            value={loginCredentials.Password}
-                            name="password"
-                            onChange={(e)=>setLoginCredentials({...loginCredentials, Password: e.target.value})} />
-                        <Form.Control.Feedback type="invalid">
-                            Please provide a valid Password.
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <br />
-                    <small><Link to="/register">Register account</Link></small>
-                    <h5 className="text-danger">{errorMessage}</h5>
-                    <Button className="btn btn-primary mt-2"  type="submit">Login</Button>
-                </Form>
-            </div>
-            <div className="mt-5">
-                <div className="row">
-                    <small className="col"><b> Admin email</b> admin@admin.com</small>
-                </div>
-                <div className="row">
-                    <small className="col"> <b> Admin password</b> virge3d</small>
-                </div>
-                <div className="row mt-2">
-                    <small className="col"><b> User email</b> user@user.com</small>
-                </div>
-                <div className="row">
-                    <small className="col"> <b> User password</b> virge3d</small>
+        <div >
+           <h2 className="text-muted "> &emsp;Login</h2>
+            <div className="container px-4 " >
+                <div className="row gx-5 " >
+                    <div className="col-6" >
+                        <div className="p-3 border bg-success p-2 text-dark bg-opacity-10" >
+                            <Form  noValidate validated={validated} onSubmit={onHandleLogin}>
+                                <Form.Group as={Col} md="6" controlId="validationCustom02">
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control
+                                        type="email"
+                                        aria-describedby="inputGroupPrepend"
+                                        value={loginCredentials.Email} name="email" 
+                                        onChange={(e)=>setLoginCredentials({...loginCredentials, Email: e.target.value})}
+                                        required
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                        Please provide a valid Email.
+                                        </Form.Control.Feedback>
+                                </Form.Group>
+                                <br />
+                                <Form.Group as={Col} md="6" controlId="validationCustom06">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control
+                                        type="password"
+                                        required
+                                        value={loginCredentials.Password}
+                                        name="password"
+                                        onChange={(e)=>setLoginCredentials({...loginCredentials, Password: e.target.value})} />
+                                    <Form.Control.Feedback type="invalid">
+                                        Please provide a valid Password.
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                                <br />
+                                <small><Link to="/register">Register account</Link></small>
+                                <h5 className="text-danger">{errorMessage}</h5>
+                                <Button className="btn btn-secondary mt-2"  type="submit">Login</Button>
+                            </Form>
+                           
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
+            <br />
+            <div className="container px-4 " >
+                <div className="row gx-5 " >
+                    <div className="col-6" >
+                        <div className="p-3 border bg-success p-2 text-dark bg-opacity-10" >
+                        <div className="row">
+                            <small className="col"><b> Admin email</b> admin@admin.com</small>
+                        </div>
+                        <div className="row">
+                            <small className="col"> <b> Admin password</b> virge3d</small>
+                        </div>
+                        <div className="row mt-2">
+                            <small className="col"><b> User email</b> user@user.com</small>
+                        </div>
+                        <div className="row">
+                            <small className="col"> <b> User password</b> virge3d</small>
+                        </div>
+                                
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
         </div>
     )
     return (
