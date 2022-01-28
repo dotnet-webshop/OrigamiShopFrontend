@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-export const apiBaseUrl = 'https://localhost:5001/';
+export const apiBaseUrl = 'https://localhost:44307/';
 export const endpoints = {
     customers: apiBaseUrl + 'customers',
     login: apiBaseUrl + 'auth/login',
