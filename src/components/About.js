@@ -8,7 +8,7 @@ export class About extends Component {
         
         return (
             <div className="container">
-                <h3>Origami <small className="text-muted"> Webshop</small></h3>
+                <h3 className= "font-monospace">Origami <small className="text-muted"> Webshop</small></h3>
                 <div className="bg-success p-2 text-dark bg-opacity-10">
                     <div className="row">
                         <div className="col">
@@ -25,7 +25,7 @@ export class About extends Component {
 
                 <div className="row">
                     <div className="col">
-                        <h5 className="text-body text-opacity-75">Project’s Features</h5>
+                        <h5 className="font-monospace text-body text-opacity-75">Project’s Features</h5>
                     </div>
                 </div>
                 <br />
@@ -71,7 +71,7 @@ export class About extends Component {
 
                 <div className="row">
                     <div className="col">
-                        <h5 className="text-body text-opacity-75">Topics Covered</h5>
+                        <h5 className="font-monospace text-body text-opacity-75">Topics Covered</h5>
                     </div>
                 </div>
 
@@ -95,7 +95,7 @@ export class About extends Component {
 
                 <div className="row">
                     <div className="col">
-                        <h5 className="text-body text-opacity-75">Contributors</h5>
+                        <h5 className="font-monospace text-body text-opacity-75">Contributors</h5>
                     </div>
                 </div>
 

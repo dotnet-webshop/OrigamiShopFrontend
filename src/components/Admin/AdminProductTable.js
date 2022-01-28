@@ -37,36 +37,40 @@ const AdminProductTable = () => {
         <div>
             <AdminNav currentRoute={"products"}/>
             <div>
-                <h1>Admin Panel - Products</h1>
+                <h2 >&emsp;Admin Panel -<small className="font-monospace text-muted">Products </small></h2> 
                 <CreateProductForm onCreate={onHandleCreateProduct}/>
             </div>
-            <p>All products</p>
-            <table className="table  table-striped">
-                <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Image</th>
-                    <th>Price</th>
-                    <th>Stock</th>
-                </tr>
-                </thead>
-                <tbody>
-                {products.map(product => 
-                <tr key={product.Id}>
-                    <td>{product.Id}</td>
-                    <td>
-                        <Link className="" to={"/product/"+product.Id}>{product.ProductName}</Link>
-                    </td>
-                    <td className="">
-                        <img className="img-thumbnail" style={{maxWidth:"100px"}} src={product.ProductImageUrl} alt={product.ProductName}/>
-                    </td>
-                    <td>${product.ProductPrice}</td>
-                    <td>{product.Stock}</td>
-                    <td><Button outline color="danger" onClick={()=>onHandleDelete(product.Id)}>Delete</Button></td>
-                </tr>)}
-                </tbody>
-            </table>
+            <br />
+            <h4 ><small className="font-monospace text-muted">&emsp;Products List </small></h4> 
+            <div className="p-3 border bg-success p-2 text-dark bg-opacity-10">
+                <table className="table  table-striped">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Image</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {products.map(product => 
+                    <tr key={product.Id}>
+                        <td>{product.Id}</td>
+                        <td>
+                            <Link className="" to={"/product/"+product.Id}>{product.ProductName}</Link>
+                        </td>
+                        <td className="">
+                            <img className="img-thumbnail" style={{maxWidth:"100px"}} src={product.ProductImageUrl} alt={product.ProductName}/>
+                        </td>
+                        <td>${product.ProductPrice}</td>
+                        <td>{product.Stock}</td>
+                        <td><Button outline color="danger" onClick={()=>onHandleDelete(product.Id)}>Delete</Button></td>
+                    </tr>)}
+                    </tbody>
+                </table>
+            </div>
+            
         </div>
     )
 }

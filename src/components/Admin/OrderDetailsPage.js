@@ -116,12 +116,10 @@ const OrderDetailsPage = ({ match }) => {
     }, [match])
 
     return (
-        <section>
+        <section className="p-3 border bg-success p-2 text-dark bg-opacity-10">
             <header className="row">
-                <h2 className="col-sm-8">
-                    Order #{order.Id}
-                </h2>
-
+                <h2 className="col-sm-8">Admin Panel -<small className="font-monospace text-muted col-sm-8"> Edit Order #{order.Id} </small> </h2>
+                
                 <div className="col">
                     <Button outline color="danger" onClick={() => onHandleDelete()} >Delete Order</Button>
                 </div>
@@ -132,7 +130,7 @@ const OrderDetailsPage = ({ match }) => {
                     </div>
                 </div>
             </header>
-            <h4 className="mt-5">Details</h4>
+            <h4 className="mt-5"><small className="font-monospace text-muted">Details</small> </h4>
             <hr></hr>
             <div>
 
@@ -176,7 +174,7 @@ const OrderDetailsPage = ({ match }) => {
             </div>
             <hr></hr>
             <div>
-                <h4>Customer</h4>
+                <h4><small className="font-monospace text-muted">Customer</small></h4>
                 <div className="row mt-5">
                     <Input type="select" value={order.CustomerId} onChange={(e) => onSelectCustomer(e.target.value)} >
                         {
@@ -189,7 +187,7 @@ const OrderDetailsPage = ({ match }) => {
                 </div>
             </div>
             <hr></hr>
-            <h4>Products</h4>
+            <h4><small className="font-monospace text-muted">Products</small></h4>
             <table className="table table-striped">
                 <thead>
                     <tr>

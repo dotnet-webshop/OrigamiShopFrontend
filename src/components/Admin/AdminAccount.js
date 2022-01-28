@@ -20,18 +20,21 @@ const AdminAccount = () => {
         <div>
             <AdminNav currentRoute="account"/>
             <article>
-                <h1>Admin Panel - Account</h1>
-                <p>
-                    Welcome <b> {adminUser.FullName}</b>!
+                <h2 >&emsp;Admin Panel -<small className="font-monospace text-muted"> Account </small></h2>
+                <div className="p-3 border bg-success p-2 text-dark bg-opacity-10">
+                    <p>
+                        Welcome <b> {adminUser.FullName}</b>!
 
-                </p>
-                <p>
-                        In the Admin Panel you can edit products, customers, and orders.
+                    </p>
+                    <p className="text-lg-start lh-lg">
+                        In the Admin Panel you can edit products, customers, and orders.<br/>
                         You can also change your own information.
                     </p>
+                </div>
+                
             </article>
             <hr/>
-            <h2>Your info</h2>
+            <h2 >&emsp;Admin's -<small className="font-monospace text-muted">Profile </small></h2>
             <EditAdminForm adminUser={adminUser}></EditAdminForm>
         </div>
     )

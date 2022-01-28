@@ -17,11 +17,16 @@ export const NavMenu = (props) => {
   const role = useSelector(state => state.user.Role)
   const isAdmin = role === 'Admin'
   
+  var icon = (
+    <span className="logo">
+        <img src="./Images/Logo/logo.png" height="120" width="160" alt="Origami Shop" />
+    </span>
+  );
     return (
       <header>
         <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light  >
           <Container>
-            <NavbarBrand tag={Link} to="/">OrigamI Shop</NavbarBrand>
+            <NavbarBrand tag={Link} to="/" >{icon}</NavbarBrand>
             <NavbarToggler onClick={()=>setCollapsed(!collapsed)} className="mr-2" />
             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!collapsed} navbar>
               <ul className="navbar-nav flex-grow">

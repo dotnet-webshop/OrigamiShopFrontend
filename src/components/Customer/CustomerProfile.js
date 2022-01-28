@@ -40,12 +40,13 @@ export const CustomerProfile = () => {
     }
 
     return (
+
         <div>
             <form>
                 <div className={"card "} style={{ width: "80rem", marginRight: "1rem", }}>
                     <div className="card-header">
                         <div className="text-center">
-                            <h5><strong>Profile</strong></h5>
+                            <h5><small className="font-monospace text-muted">&emsp;Profile </small></h5>
                             <strong>{customer.FullName}</strong>
                         </div>
                     </div>
@@ -115,5 +116,6 @@ export const CustomerProfile = () => {
             <br></br>
             <Orders orderList={customer.Orders} />
         </div>
+
     )
 }

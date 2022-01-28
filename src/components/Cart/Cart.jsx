@@ -75,39 +75,37 @@ function Cart(props) {
 
     return (
         <section className={"shopping-cart"}>
-            <h2 className="mb-5">Cart</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
 
-                    {cartItems.map((cartItem, index) =>
-                        <div key={"cart-item-" + index}>
-                            <div className={"d-flex "}>
-                                <p className="mr-3">{cartItem.product.ProductName}</p>
-                                <Input style={{ width: "10rem" }}
-                                    onChange={(e) => onQuantityChanged(e, cartItem.product.Id)}
-                                    type={"number"}
-                                    defaultValue={cartItem.quantity}
-                                    min={1}
-                                    max={cartItem.product.Stock}
-                                />
+            <h2 className="mb-3"><small className="font-monospace text-muted">&emsp;Shopping Cart </small></h2>
+            <div className="p-3 border bg-success p-2 text-dark bg-opacity-10">
+                <form onSubmit={handleSubmit}>
+                    <div  >
+                    
+                        {cartItems.map((cartItem, index) =>
+                            <div key={"cart-item-" + index}>
+                                <div className={"d-flex "}>
+                                    <p className="mr-3">{cartItem.product.ProductName}</p>
+                                    <Input className = " m-1" style={{ width: "5rem" }}
+                                        onChange={(e) => onQuantityChanged(e, cartItem.product.Id)}
+                                        type={"number"}
+                                        defaultValue={cartItem.quantity}
+                                        min={1}
+                                        max={cartItem.product.Stock}
+                                    />
 
-                                <Button
-                                    className={"bg-transparent btn btn-outline-danger"}
-                                    onClick={() => removeCartItemFromCart(cartItem.product.Id)}
-                                >X</Button>
-                            </div>
-                        </div>)
-                    }
-
-
-
-
-
-
-
-                </div>
-
-
+                                    <Button
+                                        className={"m-2 bg-transparent btn btn-outline-danger"}
+                                        onClick={() => removeCartItemFromCart(cartItem.product.Id)}
+                                    >X</Button>
+                                </div>
+                            </div>)
+                        }
+                        
+                        
+                    </div>
+                    
+                    
+                    
                 <div className="mb-5">
                     {
                         isCartEmpty() ? (<div> <h3>Your Cart is empty</h3> </div>)
@@ -118,26 +116,27 @@ function Cart(props) {
                                 </span>
 
                                 <div>
-                                    <div>
+                                    <div className = "col-md-6">
                                         Billing Address
                                         <Input value={order.ShippingAddress} name="shippingAddress"
                                             type="text"
                                             onChange={(e) => setOrder({ ...order, ShippingAddress: e.target.value })} />
                                     </div>
-                                    <div>
+                                    <div className = "col-md-6">
                                         Email
                                         <Input value={order.OrderEmail} name="orderEmail"
                                             type="text"
                                             onChange={(e) => setOrder({ ...order, OrderEmail: e.target.value })} />
                                     </div>
                                 </div>
-                                <input type="submit" value="Checkout" className="btn btn-primary" />
+                                <input type="submit" value="Checkout" className="btn btn-warning" />
 
                             </div>)
 
                     }
                 </div>
-            </form>
+                </form>
+            </div>
         </section>
     )
 }
