@@ -29,7 +29,7 @@ function Product(props){
                <div className = "d-grid gap-2 col-4 mx-auto">
                     <Button active onClick={ () => addProductToCart(props.product) } 
                         className="btn btn-success">
-                        <FontAwesomeIcon icon={faCartPlus} color=" white"/>
+                        <FontAwesomeIcon icon={faCartPlus} size= "2x" color=" white"/>
                    </Button>
                </div>
                 

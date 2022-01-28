@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 function CartIcon(props) {
     const itemCount = useSelector(state => state.cart.itemCount);
     return (
-        <span style={{ color: 'green' }}>
+        <span className="fs-7"style={{ color: 'white'}}>
             {itemCount}       
         </span>
     )
