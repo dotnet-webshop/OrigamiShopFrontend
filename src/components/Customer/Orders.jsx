@@ -48,9 +48,9 @@ function Orders({orderList}) {
                                 </Accordion.Header>
                                 <Accordion.Body>
                                     
-                                    <p>
+                                    
                                     <h4 ><small className="font-monospace text-muted"> &emsp;Products </small></h4>
-                                    </p>
+                                    
                                     <OrderDetails Items={order.Products}/>
                                 </Accordion.Body>
                             </Accordion.Item>
