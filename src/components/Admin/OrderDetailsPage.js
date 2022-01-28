@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react"
 import { endpoints, updateById, getAll, getOne, deleteById } from "../../services/api"
-import { Button, Input } from "reactstrap"
+import { Button, Input, Row } from "reactstrap"
 import { Redirect, useHistory } from "react-router-dom"
+import { Col, Form } from "react-bootstrap"
 
 const OrderDetailsPage = ({ match }) => {
 
@@ -29,18 +30,20 @@ const OrderDetailsPage = ({ match }) => {
         TotalPrice: 0
     })
 
-    const [newItem, setNewItem] = useState({
+    const initalItem = {
         ProductId: 1,
         Product: {},
         Quantity: 1
-    });
+    }
+
+    const [newItem, setNewItem] = useState(initalItem);
 
     const onAddNewItem = () => {
         if (order.Products.includes(i => i.ProductId === newItem.ProductId)){
             return;
         }
         setOrder({ ...order, Products: [...order.Products, newItem] })
-        setNewItem({})
+        setNewItem(initalItem)
     }
     const onHandleDelete = () => {
         deleteById(endpoints.orders, order.Id)
@@ -68,10 +71,11 @@ const OrderDetailsPage = ({ match }) => {
     }
 
     const onHandleSelectItem = (id, index) => {
+        const prevQuantity = products[index].Quantity
         const product = products.find(p => p.Id === parseInt(id))
         if (product !== undefined) {
             let newProducts = [...order.Products]
-            newProducts[index] = { ...newProducts[index], Product: {...product}, ProductId: product.Id , Quantity: product.Quantity }
+            newProducts[index] = { ...newProducts[index], Product: {...product}, ProductId: product.Id , Quantity: prevQuantity }
             setOrder({ ...order, Products: newProducts })
         }
     }
@@ -121,7 +125,7 @@ const OrderDetailsPage = ({ match }) => {
                 <h2 className="col-sm-8">
                     Order #{order.Id}
                 </h2>
-
+                <OrderEditForm order={order} />
                 <div className="col">
                     <Button outline color="danger" onClick={() => onHandleDelete()} >Delete Order</Button>
                 </div>
@@ -205,7 +209,8 @@ const OrderDetailsPage = ({ match }) => {
                     <tr className="my-5">
                         <td>
                             <Input type="select"
-                            onChange={(e) => setNewItem({...newItem, Product: products.find( p => p.Id === parseInt(e.target.value))})} >
+                                defaultValue={newItem.ProductId}
+                                onChange={(e) => setNewItem({...newItem, Product: products.find( p => p.Id === parseInt(e.target.value))})} >
                                 {products.map(p =>
                                     <option value={p.Id} key={p.Id} >
                                         {p.ProductName}
@@ -245,8 +250,8 @@ const OrderDetailsPage = ({ match }) => {
                             </td>
                             <td>
                                 <Input type="number"
-                                    min={1} max={item?.Product?.Stock}
-                                    defaultValue={item.Quantity ?? 1}
+                                    min={1} max={item.Product.Stock}
+                                    defaultValue={item.Quantity}
                                     onChange={(e) => setItemQuantity(index, e.target.valueAsNumber)} />
                             </td>
                             <td>
@@ -261,3 +266,91 @@ const OrderDetailsPage = ({ match }) => {
     )
 }
 export default OrderDetailsPage;
+
+const OrderEditForm = ({order, customers, products}) => {
+
+    useEffect(() => {
+        let date = Date.parse(order.OrderDate)
+        if (isNaN(date)) date = Date.now();
+        setEditedOrder({...order, OrderDate: new Date(date).toISOString()})
+    }, [order])
+    const Statuses = [
+        "Processing",
+        "Ready to pickup",
+        "Delivered",
+        "Order Cancelled"
+    ]
+    const [validated,setValidated] = useState(false)
+    const initalOrder = {
+        Id: 1,
+        OrderDate: "",
+        OrderStatus: "",
+        CustomerId: "",
+        ProductImageUrl: "",
+        OrderAddress: "",
+        OrderEmail: "",
+        ShippingAddress: "",
+        Products: [],
+        TotalPrice: 0
+    }
+    const [editedOrder,setEditedOrder] = useState(initalOrder)
+    return (
+        <Form noValidate validated={validated}>
+            <Row className="my-4">
+            <Form.Group as={Col} md={3}>
+                <Form.Label>
+                    Order Status
+                </Form.Label>
+                <Form.Select 
+                required 
+                type="select"
+                onChange={e=>setEditedOrder({...editedOrder,OrderStatus: e.target.value})}>
+                {Statuses.map( (status,index) => 
+                    <option value={status} key={index}>
+                        {status}
+                    </option>
+                )}
+                </Form.Select> 
+            </Form.Group>
+            <Form.Group as={Col} md={3}>
+                <Form.Label>
+                    Order Date
+                </Form.Label>
+                <Form.Control 
+                required 
+                type="date" 
+                value={editedOrder.OrderDate.substring(0,10)} 
+                onChange={e=>setEditedOrder({...editedOrder,OrderDate: e.target.value})} /> 
+            </Form.Group>        
+
+            </Row>
+            <Row>
+                <Form.Group as={Col} md={5}>
+                    <Form.Label>
+                        Shipping Address
+                    </Form.Label>
+                    <Form.Control 
+                    required 
+                    type="text" 
+                    value={editedOrder.ShippingAddress} 
+                    onChange={e=>setEditedOrder({...editedOrder,ShippingAddress: e.target.value})} /> 
+                </Form.Group>
+
+                <Form.Group as={Col} md={5}>
+                    <Form.Label>
+                        Order Email
+                    </Form.Label>
+                    <Form.Control 
+                    required 
+                    type="text" 
+                    value={editedOrder.OrderEmail} 
+                    onChange={e=>setEditedOrder({...editedOrder,OrderEmail: e.target.value})} /> 
+                </Form.Group>
+            </Row>
+            <br/>
+            <Row>
+
+            </Row>
+        </Form>
+    )
+}
