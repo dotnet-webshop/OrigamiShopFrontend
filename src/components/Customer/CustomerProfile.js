@@ -28,7 +28,7 @@ export const CustomerProfile = () => {
 
 
             <div >
-                <h2 >&emsp;Profile<small className="font-monospace text-muted"> Page </small></h2>
+                <h2 ><small className="font-monospace text-muted">&emsp;Profile Page </small></h2>
                 <CustomerDetails customer={customer} />
                 <br></br>
                 <Orders orderList={customer.Orders} />       
