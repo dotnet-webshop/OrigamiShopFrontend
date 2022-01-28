@@ -3,6 +3,7 @@ import {Button, Input, Label, Col} from "reactstrap";
 import {Link} from "react-router-dom";
 import {register} from "../../services/api";
 import Form from 'react-bootstrap/Form'
+import { useHistory } from "react-router-dom";
 
 function Register(){
     const [confirmPassword,setConfirmPassword] = useState("")
@@ -13,14 +14,16 @@ function Register(){
         BillingAddress:"",
         ZipCode:"",
         Country:"",
-        Username:"",
+        UserName:"",
     }
+    
     const [newUser,setNewUser] = useState(initialState)
     const [validated, setValidated] = useState(false);
+    const history = useHistory();
     
 
     function  onHandleRegister (e){
-        newUser.Username = newUser.Email
+        newUser.UserName = newUser.Email
         setValidated(true);
         e.preventDefault();
         e.stopPropagation();
@@ -28,20 +31,26 @@ function Register(){
         console.log(form.checkValidity())
         if (form.checkValidity() === false) {
             e.preventDefault();
-            e.stopPropagation(); 
+            e.stopPropagation();
             setValidated(true);
             return
         }
-        console.log(newUser)
+
         register({
-            Username:newUser.Username,
-            Password:newUser.Password
+            Username:newUser.UserName,
+            Password:newUser.Password,
+            FullName:newUser.FullName,
+            Email:newUser.Email,
+            BillingAddress:newUser.BillingAddress,
+            Country:newUser.Country,
+            ZipCode:newUser.ZipCode
+
         }).then( res => {
-            console.log(res.data)
-            if(res.data.success === true)
+            if(res.status === 200)
             {
                 console.log("success register")
                 setValidated(false);
+                history.push('/login') 
             }
             else {
                 console.log("failed to register")

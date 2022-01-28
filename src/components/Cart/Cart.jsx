@@ -1,7 +1,7 @@
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
-import {bindActionCreators} from "redux";
-import {cartActions} from "../../state/actions/index"
+import { bindActionCreators } from "redux";
+import { cartActions } from "../../state/actions/index"
 import { Button, Input } from "reactstrap";
 import { endpoints, create, getOne, createReturnsResponse } from "../../services/api";
 import { withRouter } from "react-router-dom";
@@ -14,9 +14,9 @@ function Cart(props) {
     const cartItems = useSelector((state) => state.cart.items)
     const CustomerId = useSelector((state) => state.user.Id)
     const dispatch = useDispatch()
-    const { setCartItemQuantity, removeCartItemFromCart , clearCart } = bindActionCreators(cartActions, dispatch)
+    const { setCartItemQuantity, removeCartItemFromCart, clearCart } = bindActionCreators(cartActions, dispatch)
     const history = useHistory();
- 
+
     const initialState = {
         CustomerId: '',
         Products: [],
@@ -29,7 +29,7 @@ function Cart(props) {
         this.Quantity = quantity;
     }
 
-    const [order ,setOrder] = useState(initialState)
+    const [order, setOrder] = useState(initialState)
 
 
     const onQuantityChanged = (event, productId) => {
@@ -41,7 +41,9 @@ function Cart(props) {
         setCartItemQuantity(productId, quantity)
     }
 
-    
+    const isCartEmpty = () => {
+        return cartItems.length <= 0
+    }
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -57,22 +59,23 @@ function Cart(props) {
         order.Products = Products
         console.log(order)
         createReturnsResponse(endpoints.orders, order)
-            .then(response => { 
+            .then(response => {
                 console.log(response)
                 if (response.status >= 200 && response.status < 300) {
                     clearCart()
                     history.push({
                         pathname: "/cart/receipt/",
-                        state: {receipt: response.data }
+                        state: { order: response.data }
                     })
                 }
             })
-        
+
     }
-    
+
 
     return (
         <section className={"shopping-cart"}>
+
             <h2 className="mb-3"><small className="font-monospace text-muted">&emsp;Shopping Cart </small></h2>
             <div className="p-3 border bg-success p-2 text-dark bg-opacity-10">
                 <form onSubmit={handleSubmit}>
@@ -98,44 +101,42 @@ function Cart(props) {
                             </div>)
                         }
                         
-                        {
-                        cartItems.length > 0 ?
-                            <div >
-                                <div className = "col-md-6">
-                                    Billing Address
-                                    <Input value={order.ShippingAddress} name="shippingAddress" 
-                                        type="text" 
-                                        onChange={(e)=>setOrder({...order,ShippingAddress:e.target.value})}/>
-                                </div>
-                                <div className = "col-md-6">
-                                    Email
-                                    <Input value={order.OrderEmail} name="orderEmail" 
-                                        type="text" 
-                                        onChange={(e)=>setOrder({...order,OrderEmail:e.target.value})}/>
-                                </div>
-                            </div>
-                            
-
-                            : null
-                        }
+                        
                     </div>
                     
                     
-                    <div className="mb-5">
+                    
+                <div className="mb-5">
                     {
-                        cartItems.length <= 0 ? (<div> <h3>Your Cart is empty</h3> </div>)
-                        :
+                        isCartEmpty() ? (<div> <h3>Your Cart is empty</h3> </div>)
+                            :
                             (<div >
                                 <span>
                                     Total: {cart.totalPrice}$
                                 </span>
+
+                                <div>
+                                    <div className = "col-md-6">
+                                        Billing Address
+                                        <Input value={order.ShippingAddress} name="shippingAddress"
+                                            type="text"
+                                            onChange={(e) => setOrder({ ...order, ShippingAddress: e.target.value })} />
+                                    </div>
+                                    <div className = "col-md-6">
+                                        Email
+                                        <Input value={order.OrderEmail} name="orderEmail"
+                                            type="text"
+                                            onChange={(e) => setOrder({ ...order, OrderEmail: e.target.value })} />
+                                    </div>
+                                </div>
+                                <input type="submit" value="Checkout" className="btn btn-warning" />
+
                             </div>)
+
                     }
                 </div>
-                    <input type="submit" value="Checkout" className="btn btn-warning" />
                 </form>
             </div>
-           
         </section>
     )
 }

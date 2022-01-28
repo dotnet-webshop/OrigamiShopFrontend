@@ -72,7 +72,7 @@ export const createReturnsResponse = async (endpoint, payload) => {
 
 export const register = async (user) => {
     setAuthToken()
-    return await axios.post(endpoints.register, user).then((res) => {
-        res.data
+    return await axios.post(endpoints.register, user).then((response) => {
+        return response
     }).catch((err) => err.response)
 }
