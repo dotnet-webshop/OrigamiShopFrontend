@@ -122,7 +122,7 @@ const EditProductForm = ({product, onSubmit}) => {
                             </Form.Control.Feedback>
                         </Form.Group>
                         <br />
-                        <Button color='secondary'  className='my-2' type="submit">Edit</Button>
+                        <Button variant="outline-primary" className="mt-2 ml-a" type="submit">Edit</Button>
                         {/* <Button onClick={(e) => onHandleSubmit(e)}>Edit</Button> */}
                     </Form>
                      

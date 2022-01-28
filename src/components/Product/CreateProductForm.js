@@ -97,7 +97,7 @@ const CreateProductForm = ({onCreate}) => {
                                         Please provide a valid Stock number.
                                     </Form.Control.Feedback>
                                 </Form.Group>
-                                <Button color='secondary'  className='my-2' type="submit">Create</Button>
+                                <Button variant="outline-primary" className="mt-2 ml-a" type="submit">Create</Button>
                                 {/* <Button onClick={(e) => onHandleSubmit(e)}>Create</Button> */}
                             </Form>  
                     </div>
