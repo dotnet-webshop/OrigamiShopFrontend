@@ -7,7 +7,7 @@ import CartIcon from "./Cart/CartIcon";
 import LoginMenu from "./Login/LoginMenu";
 import {useSelector} from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import { faCartArrowDown, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -34,7 +34,7 @@ export const NavMenu = (props) => {
                   <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} className="fa " to="/cart"><CartIcon /> <FontAwesomeIcon icon={faShoppingCart} color=" #F5B041"/></NavLink>
+                  <NavLink tag={Link} className="fa " to="/cart"><CartIcon /> <FontAwesomeIcon icon={faCartArrowDown}color=" #F5B041"/></NavLink>
                   
                 </NavItem>
                 <NavItem hidden={!isLoggedIn || !isAdmin }>

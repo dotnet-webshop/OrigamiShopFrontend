@@ -7,6 +7,9 @@ import { endpoints, create, getOne, createReturnsResponse } from "../../services
 import { withRouter } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+
 
 
 function Cart(props) {
@@ -108,7 +111,7 @@ function Cart(props) {
                     
                 <div className="mb-5">
                     {
-                        isCartEmpty() ? (<div> <h3>Your Cart is empty</h3> </div>)
+                        isCartEmpty() ? (<div> <h3>Your Cart is empty !  <FontAwesomeIcon icon={faShoppingCart}color=" #F5B041"/></h3> </div>)
                             :
                             (<div >
                                 <span>
