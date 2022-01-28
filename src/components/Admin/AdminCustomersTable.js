@@ -28,29 +28,33 @@ const AdminCustomersTable = () => {
     return (
         <div>
             <AdminNav currentRoute={"customers"}/>
-            <h1>Admin Panel - Customers</h1>
-            <p>All customers</p>
-            <table className="table  table-striped">
-                <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Full Name</th>
-                    <th>Email</th>
-                    <th>PhoneNumber</th>
-                </tr>
-                </thead>
-                <tbody>
-                {customers.map(customer => <tr key={customer.Id}>
-                    <td>{customer.Id}</td>
-                    <td>
-                        <Link to={"/customer/"+customer.Id}>{customer.FullName}</Link>
-                    </td>
-                    <td>{customer.Email}</td>
-                    <td>{customer.PhoneNumber}</td>
-                    <td><Button color={"danger"} outline onClick={()=> onHandleDelete(customer.Id)}>Delete</Button></td>
-                </tr>)}
-                </tbody>
-            </table>
+            <h2 >Admin Panel -<small className="font-monospace text-muted"> Customers </small></h2>
+            <br />
+            <h4 ><small className="font-monospace text-muted"> &emsp;Customers List </small></h4>
+            <div className="p-3 border bg-success p-2 text-dark bg-opacity-10">
+                <table className="table  table-striped">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>PhoneNumber</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {customers.map(customer => <tr key={customer.Id}>
+                        <td>{customer.Id}</td>
+                        <td>
+                            <Link to={"/customer/"+customer.Id}>{customer.FullName}</Link>
+                        </td>
+                        <td>{customer.Email}</td>
+                        <td>{customer.PhoneNumber}</td>
+                        <td><Button color={"danger"} outline onClick={()=> onHandleDelete(customer.Id)}>Delete</Button></td>
+                    </tr>)}
+                    </tbody>
+                </table>
+            </div>
+           
         </div>
     )
 }
