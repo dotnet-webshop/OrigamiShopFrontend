@@ -5,7 +5,7 @@
 function OrderDetails({ Items }) {
     console.table(Items);
     return (
-        <div>
+        <div className="p-3 border bg-success p-2 text-dark bg-opacity-10">
             <table className="table table-striped" >
                 <thead>
                     <tr>
