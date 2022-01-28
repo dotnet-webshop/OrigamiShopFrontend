@@ -26,9 +26,11 @@ const AdminOrdersTable = () => {
     return (
         <div>
             <AdminNav currentRoute={"orders"} />
-            <h1>Admin Panel - Orders</h1>
-            <p>All orders</p>
-            <div className="">
+            <h2 >Admin Panel -<small className="font-monospace text-muted"> Orders </small></h2>
+            <br />
+            <h4 ><small className="font-monospace text-muted"> &emsp;Orders List </small></h4>
+           
+            <div className="p-3 border bg-success p-2 text-dark bg-opacity-10">
                 <div className="row">
                     <div className="col">
                         <b>Order Id</b>
@@ -76,7 +78,7 @@ const AdminOrdersTable = () => {
                                         {order.OrderStatus}
                                     </p>
                                 </Accordion.Header>
-                                <Accordion.Body>
+                                <Accordion.Body >
                                     <Link to={`/orders/${order.Id}`}>
                                         <Button outline color="primary" className="my-2">
                                             Edit Order

@@ -55,31 +55,44 @@ const EditAdminForm = ({ adminUser }) => {
     }
 
     return (
-        <Form noValidate validated={validated} onSubmit={onFormSubmit} style={{ maxWidth: "30em" }}>
-            <Form.Group>
-                <Form.Label htmlFor="FullName"> Full Name</Form.Label>
-                <Form.Control required name="FullName"
-                    defaultValue={editedAdmin.FullName} type="text"
-                    onChange={(e) => setEditedAdmin({ ...editedAdmin, FullName: e.target.value })} />
-            </Form.Group>
 
-            <Form.Group>
-                <Form.Label htmlFor="Email"> Email</Form.Label>
-                <Form.Control required name="Email"
-                    defaultValue={editedAdmin.Email} type="email"
-                    onChange={(e) => setEditedAdmin({ ...editedAdmin, Email: e.target.value })} />
-            </Form.Group>
+        <div className="container px-4 " >
+                <div className="row gx-5 " >
+                    <div className="col-7" >
+                        <div className="p-3 border bg-success p-2 text-dark bg-opacity-10" >
+                            <Form noValidate validated={validated} onSubmit={onFormSubmit} style={{ maxWidth: "30em" }}>
+                                <Form.Group>
+                                    <Form.Label htmlFor="FullName"> Full Name</Form.Label>
+                                    <Form.Control required name="FullName"
+                                        defaultValue={editedAdmin.FullName} type="text"
+                                        onChange={(e) => setEditedAdmin({ ...editedAdmin, FullName: e.target.value })} />
+                                </Form.Group>
 
-            <Form.Group>
-                <Form.Label htmlFor="PhoneNumber"> Phone</Form.Label>
-                <Form.Control required name="PhoneNumber"
-                    defaultValue={editedAdmin.PhoneNumber} type="text"
-                    onChange={(e) => setEditedAdmin({ ...editedAdmin, PhoneNumber: e.target.value })} />
-            </Form.Group>
-            <Form.Group>
-                <Button required type="submit" variant="outline-primary" className="mt-2 ml-a">Save</Button>
-            </Form.Group>
-        </Form>
+                                <Form.Group>
+                                    <Form.Label htmlFor="Email"> Email</Form.Label>
+                                    <Form.Control required name="Email"
+                                        defaultValue={editedAdmin.Email} type="email"
+                                        onChange={(e) => setEditedAdmin({ ...editedAdmin, Email: e.target.value })} />
+                                </Form.Group>
+
+                                <Form.Group>
+                                    <Form.Label htmlFor="PhoneNumber"> Phone</Form.Label>
+                                    <Form.Control required name="PhoneNumber"
+                                        defaultValue={editedAdmin.PhoneNumber} type="text"
+                                        onChange={(e) => setEditedAdmin({ ...editedAdmin, PhoneNumber: e.target.value })} />
+                                </Form.Group>
+                                <Form.Group>
+                                    <Button required type="submit" variant="outline-secondary" className="mt-2 ml-a">Save</Button>
+                                </Form.Group>
+                            </Form> 
+                           
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        
     )
 }
 

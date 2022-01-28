@@ -9,9 +9,9 @@ function Orders({orderList}) {
     
     return (
         <div >
-           <h4><small className="text-muted">  Orders</small></h4>
+           <h4 ><small className="font-monospace text-muted"> &emsp;My Orders </small></h4>
            <br></br>
-            <div className="bg-success p-2 text-dark bg-opacity-25">
+            <div className="bg-success p-2 text-dark bg-opacity-10">
                 <div className="row">
 
                     <div className="col">Order Number</div>
@@ -48,9 +48,9 @@ function Orders({orderList}) {
                                 </Accordion.Header>
                                 <Accordion.Body>
                                     
-                                    <p>
-                                       <b> Products</b>
-                                    </p>
+                                    
+                                    <h4 ><small className="font-monospace text-muted"> &emsp;Products </small></h4>
+                                    
                                     <OrderDetails Items={order.Products}/>
                                 </Accordion.Body>
                             </Accordion.Item>

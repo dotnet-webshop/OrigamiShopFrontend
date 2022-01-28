@@ -119,7 +119,7 @@ const OrderDetailsPage = ({ match }) => {
     }, [match])
 
     return (
-        <section>
+        <section className="p-3 border bg-success p-2 text-dark bg-opacity-10">
             <header className="row">
                 <h2 className="col-sm-8">
                     Edit Order #{order.Id}
@@ -186,7 +186,6 @@ const OrderEditForm = ({ order, customers, products }) => {
                         value={editedOrder.OrderDate.substring(0, 10)}
                         onChange={e => setEditedOrder({ ...editedOrder, OrderDate: e.target.value })} />
                 </Form.Group>
-
             </Row>
             <Row>
                 <Form.Group as={Col} md={5}>

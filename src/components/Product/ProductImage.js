@@ -22,21 +22,26 @@ export const ProductImageFormComponent = ({ product, setProduct }) => {
 
     return (
 
-        <div>
-            <Label for="Image">Image</Label>
-            <div className="row">
-                <div className="col-lg-10">
-                    <select className="form-control"
-                        defaultValue={productImages[0]}
-                        onChange={(e) => setProduct({ ...product, ProductImageUrl: e.target.value })}
-                        name="Image" type="image">
-                        {selectProductImageList}
-                    </select>
-                </div>
-                <div className="col-lg-2">
-                    <img src={product.ProductImageUrl} alt={product.ProductName} width="150px" height="150px" />
+        <div className="container px-4 " >
+            
+            <div className="row gx-5 " >
+                <div className="col-10" >
+                    <Label for="Image">Image</Label>
+                    <div className="col-lg-10">
+                            <select className="form-control"
+                                defaultValue={productImages[0]}
+                                onChange={(e) => setProduct({ ...product, ProductImageUrl: e.target.value })}
+                                name="Image" type="image">
+                                {selectProductImageList}
+                            </select>
+                    </div>
+                    <br/>
+                    <div className="col-lg-2">
+                        <img src={product.ProductImageUrl} alt={product.ProductName} width="150px" height="150px" />
+                    </div>
                 </div>
             </div>
         </div>
+        
     )
 }
