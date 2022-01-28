@@ -7,7 +7,8 @@ import CartIcon from "./Cart/CartIcon";
 import LoginMenu from "./Login/LoginMenu";
 import {useSelector} from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import { faCartArrowDown} from '@fortawesome/free-solid-svg-icons'
+import Badge from 'react-bootstrap/Badge'
 
 
 
@@ -34,8 +35,16 @@ export const NavMenu = (props) => {
                   <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} className="fa " to="/cart"><CartIcon /> <FontAwesomeIcon icon={faShoppingCart} color=" #F5B041"/></NavLink>
-                  
+                  <NavLink tag={Link} className="fa " to="/cart">
+                    <div className="position-relative">
+                      <FontAwesomeIcon icon={faCartArrowDown} size= "2x" color=" #F5B041"/>
+                        <Badge pill bg="success"
+                        className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                        >
+                          <CartIcon /><span className="visually-hidden">Items in Cart</span>
+                        </Badge>{' '}
+                    </div>
+                  </NavLink>
                 </NavItem>
                 <NavItem hidden={!isLoggedIn || !isAdmin }>
                   <NavLink tag={Link} className="text-dark" to="/admin-panel/account">Admin Panel</NavLink>

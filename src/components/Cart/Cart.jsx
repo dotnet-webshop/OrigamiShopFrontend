@@ -6,6 +6,9 @@ import { Button, Input } from "reactstrap";
 import { endpoints, create, getOne, createReturnsResponse } from "../../services/api";
 import { withRouter } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import Badge from 'react-bootstrap/Badge'
 
 
 
@@ -108,7 +111,19 @@ function Cart(props) {
                     
                 <div className="mb-5">
                     {
-                        isCartEmpty() ? (<div> <h3>Your Cart is empty</h3> </div>)
+                        isCartEmpty() ?
+                         (<div className="text-center"> 
+                            <h3>Your Cart is empty ! </h3> <br />
+                            <div className="position-relative">
+                              <FontAwesomeIcon icon={faShoppingCart} size= "5x" color=" #F5B041"/>
+                                <Badge pill bg="success"
+                                className="position-absolute top-0 start-70 translate-middle mt-1 badge rounded-pill bg-danger"
+                                >
+                                0 <span className="visually-hidden">Items in Cart</span>
+                                </Badge>{' '}
+                            </div>
+                         
+                         </div>)
                             :
                             (<div >
                                 <span>
