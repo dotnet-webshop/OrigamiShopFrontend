@@ -33,6 +33,8 @@ export const CustomerProfile = () => {
                 if (p !== null) {
                     setCustomer({ ...p });
                     setMessage("Profile saved!");
+                } else {
+                    setMessage("Error saving profile!");
                 }
             })
     }
