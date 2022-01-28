@@ -44,7 +44,7 @@ export const CustomerProfile = () => {
         <div>
             <form>
                 <div className={"card "} style={{ width: "80rem", marginRight: "1rem", }}>
-                    <div className="card-header">
+                    <div className="card-header p-3 border bg-success p-2 text-dark bg-opacity-10">
                         <div className="text-center">
                             <h5><small className="font-monospace text-muted">&emsp;Profile </small></h5>
                             <strong>{customer.FullName}</strong>
