@@ -37,7 +37,7 @@ export const ProductImageFormComponent = ({ product, setProduct }) => {
                     </div>
                     <br/>
                     <div className="col-lg-2">
-                        <img src={product.ProductImageUrl} alt={product.ProductName} width="150px" height="150px" />
+                        <img src={product.ProductImageUrl === "" ? productImages[0]: product.ProductImageUrl} alt={product.ProductName} width="150px" height="150px" />
                     </div>
                 </div>
             </div>
