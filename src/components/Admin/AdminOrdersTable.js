@@ -6,8 +6,10 @@ import { Accordion } from 'react-bootstrap';
 import {Button} from 'reactstrap';
 const AdminOrdersTable = () => {
     const [orders, setOrders] = useState([])
+    const [customers,setCustomers] = useState([])
     useEffect(() => {
         getAll(endpoints.orders).then(data => setOrders(data))
+        getAll(endpoints.customers).then(data => setCustomers(data))
     }, []);
 
     const onHandleDelete = (Id) => {
@@ -36,7 +38,7 @@ const AdminOrdersTable = () => {
                         <b>Order Id</b>
                     </div>
                     <div className="col">
-                        <b>Customer Id</b>
+                        <b>Customer</b>
                     </div>
                     <div className="col">
                         <b>Date Created</b>
@@ -54,7 +56,9 @@ const AdminOrdersTable = () => {
                 </div>
                 <div>
                     {orders.map(order => <div key={order.Id}>
-
+                        
+                        
+                        
                         <Accordion>
                             <Accordion.Item eventKey="0">
                                 <Accordion.Header className="row">
@@ -63,7 +67,7 @@ const AdminOrdersTable = () => {
                                     </p>
                                     <p className="col">
 
-                                        {order.CustomerId}
+                                        {customers.find(e => e.Id === order.CustomerId).FullName}
                                     </p>
                                     <p className="col">
                                         {new Date(order.OrderDate).toDateString()}
@@ -90,12 +94,10 @@ const AdminOrdersTable = () => {
                                     </p>
                                     <p>
                                         <b>Customer </b>
-                                        {order.CustomerId}
+                                        {customers.find(e => e.Id === order.CustomerId)?.FullName}
                                     </p>
-
-                                    <p>
-                                        <b> Products</b>
-                                    </p>
+                                    <hr/>
+                                    <h4> Products</h4>
                                     <table className="table table-striped" >
                                         <thead>
                                             <tr>
