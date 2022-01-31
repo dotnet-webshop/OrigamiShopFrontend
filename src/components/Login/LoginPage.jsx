@@ -49,7 +49,7 @@ function LoginPage(){
                     onLogin(res.Token)
                     
                 } else {
-                    setErrorMessage('Error logging in!')
+                    setErrorMessage('Wrong Email / password !')
                 }
             }
         )
