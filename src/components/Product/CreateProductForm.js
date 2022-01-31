@@ -10,7 +10,7 @@ const CreateProductForm = ({onCreate}) => {
         ProductImageUrl:"",
         ProductDescription:"",
         DateCreated:Date.now().toString(),
-        Stock: 0
+        Stock: 1
     }
     // const initialStockState = { Stock: 0 }
 
