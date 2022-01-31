@@ -19,6 +19,7 @@ function Register(){
     
     const [newUser,setNewUser] = useState(initialState)
     const [validated, setValidated] = useState(false);
+    const [message, setMessage] = useState();
     const history = useHistory();
     
 
@@ -48,11 +49,13 @@ function Register(){
         }).then( res => {
             if(res.status === 200)
             {
+                setMessage("Successfuly registered user!");
                 console.log("success register")
                 setValidated(false);
                 history.push('/login') 
             }
             else {
+                setMessage("Failed to register!");
                 console.log("failed to register")
             }
         }).catch(err => console.log(err))
@@ -217,6 +220,8 @@ function Register(){
                     </div>
                     
                 </div>
+                <p className="text-danger">{message}</p>
+
             </div>
             
            
