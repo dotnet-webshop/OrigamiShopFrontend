@@ -177,6 +177,7 @@ const OrderEditForm = ({ order, customers, products }) => {
                     <Form.Select
                         required
                         type="select"
+                        value={editedOrder.OrderStatus}
                         onChange={e => setEditedOrder({ ...editedOrder, OrderStatus: e.target.value })}>
                         {Statuses.map((status, index) =>
                             <option value={status} key={index}>
