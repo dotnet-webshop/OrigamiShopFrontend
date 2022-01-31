@@ -35,7 +35,7 @@ function Register(){
             setValidated(true);
             return
         }
-
+        setValidated(false);
         register({
             Username:newUser.UserName,
             Password:newUser.Password,
@@ -48,11 +48,13 @@ function Register(){
         }).then( res => {
             if(res.status === 200)
             {
+               
                 console.log("success register")
-                setValidated(false);
+                
                 history.push('/login') 
             }
             else {
+                setValidated(true);
                 console.log("failed to register")
             }
         }).catch(err => console.log(err))
@@ -82,11 +84,15 @@ function Register(){
                                     <Form.Label>Full Name</Form.Label>
                                     <Form.Control
                                         required
+                                        placeholder="Enter your Name"
                                         type="text"
                                         value={newUser.FullName} name="fullName" 
                                         onChange={(e)=>setNewUser({...newUser,FullName: e.target.value})}
                                     />
                                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                    <Form.Control.Feedback type="invalid">
+                                        Empty field or Username already in use!
+                                        </Form.Control.Feedback>
                                 </Form.Group>
                                 <br />
                                 
@@ -100,11 +106,13 @@ function Register(){
                                     <Form.Label>Email</Form.Label>
                                     <Form.Control
                                         type="email"
+                                        placeholder="test@example.com"
                                         aria-describedby="inputGroupPrepend"
                                         value={newUser.Email} name="email" 
                                         onChange={(e)=>setNewUser({...newUser,Email:e.target.value})} 
                                         required
                                         />
+                                        <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                         <Form.Control.Feedback type="invalid">
                                         Please provide a valid Email.
                                         </Form.Control.Feedback>
@@ -126,7 +134,7 @@ function Register(){
                                         required 
                                         onChange={(e)=>setNewUser({...newUser,BillingAddress:e.target.value})} />
                                     <Form.Control.Feedback type="invalid">
-                                        Please provide a valid Address.
+                                        Please enter your Address.
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <br />
@@ -142,7 +150,7 @@ function Register(){
                                         value={newUser.Country} name="country" 
                                         onChange={(e)=>setNewUser({...newUser,Country:e.target.value})} />
                                     <Form.Control.Feedback type="invalid">
-                                        Please provide a valid Country.
+                                        Please enter your Country.
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <br />
@@ -155,12 +163,15 @@ function Register(){
                                     <Form.Label>Password</Form.Label>
                                     <Form.Control
                                     type="password"   
-                                    required  
+                                    required 
+                                    placeholder="Enter password"  
                                     value={newUser.Password} 
                                     name="password"  
                                     onChange={(e)=>setNewUser({...newUser,Password:e.target.value})} />
                                     <Form.Control.Feedback type="invalid">
-                                        Please provide a valid Password.
+                                    Passwords must be at least 6 characters that include at least one uppercase ('A'-'Z'),<br />
+                                    one digit ('0'-'9'),non alphanumeric character,
+                                     
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <br />
@@ -169,10 +180,11 @@ function Register(){
                                     onChange={(e)=>setConfirmPassword(e.target.value)}/> */}
                                 <Form.Group as={Col} md="6" controlId="validationCustom07">
                                     <Form.Label>Confirm Password</Form.Label>
-                                    <Form.Control type="password"  placeholder="" required value={confirmPassword} name="confirmPassword" 
-                                    onChange={(e)=>setConfirmPassword(e.target.value)} />
+                                    <Form.Control type="password"  placeholder="Confirm password" required value={confirmPassword} name="confirmPassword" 
+                                    onChange={(e)=>setConfirmPassword(e.target.value)}
+                                    />
                                     <Form.Control.Feedback type="invalid">
-                                        Please confirm your Password.
+                                    Confirmed password must match the password you entered!
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <br />
