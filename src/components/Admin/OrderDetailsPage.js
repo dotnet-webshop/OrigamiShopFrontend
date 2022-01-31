@@ -118,14 +118,15 @@ const OrderEditForm = ({ order, customers, products }) => {
         ).then(
             
             data => {
+                let updatedOrder = data
+                updatedOrder.OrderDate = updatedOrder.OrderDate.split('T')[0];
                 setEditedOrder({ ...data })
                 setTimeout(() => setValidated(false) , 500)
                 
             }
-        )
-
-        
+        )     
     }
+
     const setItemQuantity = (index, amount) => {
         if (isNaN(amount)) amount = 1;
 
@@ -145,7 +146,7 @@ const OrderEditForm = ({ order, customers, products }) => {
     useEffect(() => {
         let date = Date.parse(order.OrderDate)
         if (isNaN(date)) date = Date.now()
-        setEditedOrder({ ...order, OrderDate: new Date(date).toUTCString().split('T')[0] })
+        setEditedOrder({ ...order, OrderDate: new Date(date).toISOString().split('T')[0] })
     }, [order, products])
 
     const onAddNewItem = () => {
@@ -192,7 +193,7 @@ const OrderEditForm = ({ order, customers, products }) => {
                     <Form.Control
                         required
                         type="date"
-                        value={editedOrder.OrderDate.split('T')[0]}
+                        value={editedOrder.OrderDate}
                         onChange={e => setEditedOrder({ ...editedOrder, OrderDate: e.target.value.split('T')[0] })} />
                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
