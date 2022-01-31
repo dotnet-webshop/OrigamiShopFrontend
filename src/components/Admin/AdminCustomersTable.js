@@ -45,7 +45,7 @@ const AdminCustomersTable = () => {
                     {customers.map(customer => <tr key={customer.Id}>
                         <td>{customer.Id}</td>
                         <td>
-                            <Link to={"/customer/"+customer.Id}>{customer.FullName}</Link>
+                            {customer.FullName}
                         </td>
                         <td>{customer.Email}</td>
                         <td>{customer.PhoneNumber}</td>
