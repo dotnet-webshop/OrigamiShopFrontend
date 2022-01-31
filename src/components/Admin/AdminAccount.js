@@ -1,5 +1,5 @@
 import {useSelector} from "react-redux";
-import AdminNav from "../Cart/AdminNav";
+import AdminNav from "./AdminNav";
 import React, { useEffect, useState } from "react";
 import {endpoints,getOne} from '../../services/api';
 import EditAdminForm from "./EditAdminForm";

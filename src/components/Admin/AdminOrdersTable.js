@@ -1,4 +1,4 @@
-import AdminNav from "../Cart/AdminNav";
+import AdminNav from "./AdminNav";
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { deleteById, endpoints, getAll } from "../../services/api";

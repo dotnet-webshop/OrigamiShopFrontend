@@ -1,5 +1,5 @@
 import {useSelector} from "react-redux";
-import AdminNav from "../Cart/AdminNav";
+import AdminNav from "./AdminNav";
 import React, {useEffect, useState} from "react";
 import {create, deleteById, endpoints, getAll} from "../../services/api";
 import CreateProductForm from "../Product/CreateProductForm";
