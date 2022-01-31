@@ -8,7 +8,7 @@ const ProductDetails = ({ match}) => {
     const [product,setProduct] = useState({
         ProductName:"",
         Id:0,
-        Stock:0,
+        Stock:1,
         ProductPrice:0,
         ProductDescription:"",
         ProductImageUrl:"",

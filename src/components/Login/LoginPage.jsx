@@ -40,15 +40,16 @@ function LoginPage(){
             Password:"",
             Email:"",
         }); 
+        setValidated(false);
         login(pw,mail).then(
             res => {
                 if (res !== undefined) {
-                    setValidated(false);
+                    
                     console.log(res.Token)
                     onLogin(res.Token)
                     
                 } else {
-                    setErrorMessage('Error logging in!')
+                    setErrorMessage('Wrong Email / password !')
                 }
             }
         )
