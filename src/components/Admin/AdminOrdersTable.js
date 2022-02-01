@@ -8,8 +8,8 @@ const AdminOrdersTable = () => {
     const [orders, setOrders] = useState([])
     const [customers,setCustomers] = useState([])
     useEffect(() => {
-        getAll(endpoints.orders).then(data => setOrders(data))
         getAll(endpoints.customers).then(data => setCustomers(data))
+        getAll(endpoints.orders).then(data => setOrders(data))
     }, []);
 
     const onHandleDelete = (Id) => {
@@ -67,7 +67,7 @@ const AdminOrdersTable = () => {
                                     </p>
                                     <p className="col">
 
-                                        {customers.find(e => e.Id === order.CustomerId).FullName}
+                                        {customers && customers.find(e => e.Id === order.CustomerId)?.FullName}
                                     </p>
                                     <p className="col">
                                         {new Date(order.OrderDate).toDateString()}
@@ -94,7 +94,7 @@ const AdminOrdersTable = () => {
                                     </p>
                                     <p>
                                         <b>Customer </b>
-                                        {customers.find(e => e.Id === order.CustomerId)?.FullName}
+                                        {customers && customers.find(e => e.Id === order.CustomerId)?.FullName}
                                     </p>
                                     <hr/>
                                     <h4> Products</h4>

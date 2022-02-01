@@ -5,12 +5,12 @@ import {Button} from "reactstrap";
 import {useSelector} from "react-redux";
 import { Link } from "react-router-dom";
 
-const AdminCustomersTable = () => {
+const AdminCustomersTable = (props) => {
     const [customers,setCustomers] = useState([])
     const user = useSelector(state => state.user)
     useEffect(() => {
         getAll(endpoints.customers).then(data => setCustomers(data))
-    },[]);
+    },[props]);
     
     const onHandleDelete = (id) => {
 
