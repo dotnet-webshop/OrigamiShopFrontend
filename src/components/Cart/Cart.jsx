@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import Badge from 'react-bootstrap/Badge'
+import { Col, Row } from "react-bootstrap";
 
 
 
@@ -23,6 +24,7 @@ function Cart(props) {
     const initialState = {
         CustomerId: '',
         Products: [],
+        ProductImageUrl: '',
         ShippingAddress: '',
         OrderEmail: '',
     }
@@ -82,30 +84,31 @@ function Cart(props) {
             <h2 className="mb-3"><small className="font-monospace text-muted">&emsp;Shopping Cart </small></h2>
             <div className="p-3 border bg-success p-2 text-dark bg-opacity-10">
                 <form onSubmit={handleSubmit}>
-                    <div  >
+                    <Row>
                     
                         {cartItems.map((cartItem, index) =>
                             <div key={"cart-item-" + index}>
                                 <div className={"d-flex "}>
-                                    <p className="mr-3">{cartItem.product.ProductName}</p>
-                                    <Input className = " m-1" style={{ width: "5rem" }}
+                                    <Col xs={6}> <p className="mr-3">{cartItem.product.ProductName}</p></Col>
+                                    <Col>
+                                    <Input className=" m-1" style={{ width: "5rem" }}
                                         onChange={(e) => onQuantityChanged(e, cartItem.product.Id)}
                                         type={"number"}
                                         defaultValue={cartItem.quantity}
                                         min={1}
                                         max={cartItem.product.Stock}
-                                    />
+                                    /></Col>
 
-                                    <Button
-                                        className={"m-2 bg-transparent btn btn-outline-danger"}
+                                   <Col> <Button
+                                        className={"m-1 bg-transparent btn btn-outline-danger"}
                                         onClick={() => removeCartItemFromCart(cartItem.product.Id)}
-                                    >X</Button>
+                                    >X</Button></Col>
                                 </div>
                             </div>)
                         }
                         
-                        
-                    </div>
+
+                    </Row>
                     
                     
                     
